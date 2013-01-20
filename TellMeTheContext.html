@@ -7,10 +7,17 @@
 		
 	</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta http-equiv="e-xpires" content="mon, 06 jan 1990 00:00:01 GMT" />
+	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
 	<style>
 		body { font-family: "Malgun Gothic"; font-size:13pt; color:#000000; line-height:160%; }
-		h1 { font-size: 22pt; }
+		h1 { font-size: 12pt; }
+		.bigh1 {
+			font-size: 18pt;
+		}
+		h2 { font-size: 14pt; }
+		h3 { font-size: 13pt; }
+		h4 { font-size: 12pt; }
+		p { padding: 0; margin: 0; }
 		.center {
 			max-width: 600pt;
 			margin-left: auto;
@@ -19,24 +26,23 @@
 		.title {
 			text-align: left;
 		}
+		.date {
+			font-size: 11pt;
+			color: gray;
+			margin-bottom: 40pt;
+		}
 		.text {}
 		.page {
-			border: 1px solid #cccccc;
 			border-radius: 12pt;
 			background:#ffffff;
-			padding-top: 30pt;
+			padding-top: 40pt;
 			padding-left: 40pt;
 			padding-right: 40pt;
-			padding-bottom: 30pt;
+			padding-bottom: 40pt;
 			margin-bottom: 20pt;
 			-moz-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
 			-webkit-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
 			box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
-		}
-		.date {
-			font-size: 11pt;
-			color: gray;
-			margin-bottom: 20pt;
 		}
 		.nav {
 			text-align: center;
@@ -44,6 +50,12 @@
 		}
 		.internalLink {
 			color: #4477ff;
+		}
+		.linkToTop {
+			color: black;
+		}
+		.emptyLine {
+			height: 10pt;
 		}
 	</style>
 </head>
@@ -53,25 +65,30 @@
 	<div class=center>
 		<div class=page>
 			<div class=title>
-				<h1>뭘 하고 싶은가? 맥락을 말해보라.</h1>
+				<h1>
+					<a href='/' class=linkToTop>lee-seungjae.github.com</a>
+					<a href='rss.xml'><img src='feed16.gif'></a>
+					<br>
+					<font class=bigh1>뭘 하고 싶은가? 맥락을 말해보라.</font>
+				</h1>
 			</div>
 			<div class=date>
-				이승재, 2011-07-26
+				2011-07-26
 			</div>
 			<div class=text>
 				<p>소프트웨어를 개발하는 도중에 맞닥뜨린 문제 때문에 도움을 요청받았을 때, 그 문제에 대한 해답을 바로 제시하기보다는 그 문제를 해결함으로써 무엇을 얻고자 하는 것인지를 종종 묻게 된다. 주로 "뭘 하고 싶은 건데?" 내지는 "맥락을 말해봐." 라는 형태로 질문하는데, 이에 대한 배경 설명을 좀 해보려고 한다.</p>
-<p></p>
+<p class='emptyLine'></p>
 <p>소프트웨어 개발을 거대한 문제 해결 과정이라고 생각해 보자. '이러저러한 것을 만든다' 라는 추상적인 목표가 근본 문제이고, 소프트웨어를 개발하는 여정은 이 근본 문제를 좀더 작고 구체적이고 해결할만해보이는 문제들로 쪼개거나(Divide and conquer), 답이 이미 알려진 문제로 변환(Reduction)하고, 이것을 재귀적으로 적용해서 문제들이 더이상 쪼개거나 변환할 필요가 없을 정도로 간단해지면, 직접 해결하는 것이다.</p>
-<p></p>
+<p class='emptyLine'></p>
 <p>이런 관점에서 보면, 모든 문제는 스스로 존재하는 것이 아니라 다른 문제를 풀기 위한 해결책으로서 만들어진 것이다. 풀기 난감한 문제에 맞닥뜨렸을 때, 이 문제가 어떤 다른 문제를 쪼개거나 변환해서 만들어진 것인지, 즉 어떤 다른 문제를 풀기 위한 것인지 떠올려 보자. 쪼개거나 변환하는 방식을 달리하면 좀더 낮은 비용으로 전체 문제를 해결할 수 있는 경우가 많다.</p>
-<p></p>
+<p class='emptyLine'></p>
 <p>다음 문제 해결 과정에서 어디가 잘못되었을까?</p>
-<p></p>
+<p class='emptyLine'></p>
 <p>"나무를 베자. 도끼로 나무를 베어야겠다. 그런데 도끼날이 너무 무디다. 도끼날을 갈아야겠는데 숫돌이 없다. 어떤 마을에 도끼날을 갈 수 있는 좋은 돌이 있다고 한다. 그 마을은 너무 멀어서 야크를 타고 가야겠다. 그런데 야크 털이 너무 길다. 야크 털을 깎자."</p>
-<p></p>
-<p></p>
+<p class='emptyLine'></p>
+<p class='emptyLine'></p>
 <p>답은 나무를 베어야 하는 이유가 무엇인지(나무를 벤다는 문제가 어떤 다른 문제를 풀기 위해서 만들어진 것인지)에 따라 달라진다. 그 이유에 따라 나무를 벨 필요가 없을 수도 있고, 무딘 도끼날로 힘들게 나무를 베는 게 바람직할 수도 있고, 야크 털 깎고 옆 마을에 갔다 오는 게 바람직할 수도 있다.</p>
-<p></p>
+<p class='emptyLine'></p>
 <p>뭘 하고 싶은가? 맥락을 말해보라.</p>
 
 			</div>
