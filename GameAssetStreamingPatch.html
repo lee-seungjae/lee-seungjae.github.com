@@ -8,8 +8,10 @@
 	</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
+	<LINK rel='STYLESHEET' type='text/css' href='syntax/SyntaxHighlighter.css'>
 	<style>
 		body { font-family: "Malgun Gothic"; font-size:13pt; color:#000000; line-height:160%; }
+		.quote { font-size: 13pt; background-color:#f0f0f0; border:1px solid #e0e0e0; font-family: "Malgun Gothic"; padding: 10pt; }
 		h1 { font-size: 12pt; }
 		.bigh1 {
 			font-size: 18pt;
@@ -49,7 +51,10 @@
 			color: #6699ff;
 		}
 		.internalLink {
-			color: #4477ff;
+			color: #6699ff;
+		}
+		.externalLink {
+			color: #008000;
 		}
 		.linkToTop {
 			color: black;
@@ -57,6 +62,12 @@
 		.emptyLine {
 			height: 10pt;
 		}
+		.indent1 { margin-left: 10pt; }
+		.indent2 { margin-left: 20pt; }
+		.indent3 { margin-left: 30pt; }
+		.indent4 { margin-left: 40pt; }
+		.indent5 { margin-left: 50pt; }
+		hr { width: 90%; border:0; border-bottom:1px #aaaaaa dashed }
 	</style>
 </head>
 
@@ -86,6 +97,23 @@
 			<a href='.' class=nav>목록으로</a>
 		</div>
 	</div>
+	<script class="javascript" src="syntax/shCore.js"></script> 
+	<script class="javascript" src="syntax/shBrushCSharp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCpp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCss.js"></script> 
+	<script class="javascript" src="syntax/shBrushDelphi.js"></script> 
+	<script class="javascript" src="syntax/shBrushJScript.js"></script> 
+	<script class="javascript" src="syntax/shBrushJava.js"></script> 
+	<script class="javascript" src="syntax/shBrushPhp.js"></script> 
+	<script class="javascript" src="syntax/shBrushPython.js"></script> 
+	<script class="javascript" src="syntax/shBrushRuby.js"></script> 
+	<script class="javascript" src="syntax/shBrushSql.js"></script> 
+	<script class="javascript" src="syntax/shBrushVb.js"></script> 
+	<script class="javascript" src="syntax/shBrushXml.js"></script> 
+	<script class="javascript"> 
+		dp.SyntaxHighlighter.ClipboardSwf = 'syntax/clipboard.swf';
+		dp.SyntaxHighlighter.HighlightAll('code');
+	</script>
 
 
 

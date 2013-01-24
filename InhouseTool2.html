@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		
+			인하우스 툴 만들기 2
+		
+	</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
+	<LINK rel='STYLESHEET' type='text/css' href='syntax/SyntaxHighlighter.css'>
+	<style>
+		body { font-family: "Malgun Gothic"; font-size:13pt; color:#000000; line-height:160%; }
+		.quote { font-size: 13pt; background-color:#f0f0f0; border:1px solid #e0e0e0; font-family: "Malgun Gothic"; padding: 10pt; }
+		h1 { font-size: 12pt; }
+		.bigh1 {
+			font-size: 18pt;
+		}
+		h2 { font-size: 14pt; }
+		h3 { font-size: 13pt; }
+		h4 { font-size: 12pt; }
+		p { padding: 0; margin: 0; }
+		.center {
+			max-width: 600pt;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.title {
+			text-align: left;
+		}
+		.date {
+			font-size: 11pt;
+			color: gray;
+			margin-bottom: 40pt;
+		}
+		.text {}
+		.page {
+			border-radius: 12pt;
+			background:#ffffff;
+			padding-top: 40pt;
+			padding-left: 40pt;
+			padding-right: 40pt;
+			padding-bottom: 40pt;
+			margin-bottom: 20pt;
+			-moz-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
+			-webkit-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
+			box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
+		}
+		.nav {
+			text-align: center;
+			color: #6699ff;
+		}
+		.internalLink {
+			color: #6699ff;
+		}
+		.externalLink {
+			color: #008000;
+		}
+		.linkToTop {
+			color: black;
+		}
+		.emptyLine {
+			height: 10pt;
+		}
+		.indent1 { margin-left: 10pt; }
+		.indent2 { margin-left: 20pt; }
+		.indent3 { margin-left: 30pt; }
+		.indent4 { margin-left: 40pt; }
+		.indent5 { margin-left: 50pt; }
+		hr { width: 90%; border:0; border-bottom:1px #aaaaaa dashed }
+	</style>
+</head>
+
+<body bgcolor="#444444" style='margin:30pt'>
+
+	<div class=center>
+		<div class=page>
+			<div class=title>
+				<h1>
+					<a href='/' class=linkToTop>lee-seungjae.github.com</a>
+					<a href='rss.xml'><img src='feed16.gif'></a>
+					<br>
+					<font class=bigh1>인하우스 툴 만들기 2</font>
+				</h1>
+			</div>
+			<div class=date>
+				2010-03-04
+			</div>
+			<div class=text>
+				<li>구조적이고 자기서술적인 포맷 2</li>
+<p class=indent1> 자기서술적이라는 것은 데이터의 의미를 데이터 자체에 포함하고 있다는 뜻이다. 이를테면</p>
+<p class=indent1> A:</p>
+<pre name='code' class='JScript'>
+ Kim, 228.56,
+ Asada, 205.50,
+ Rochette, 202.64,
+</pre>
+<p class=indent1> B:</p>
+<pre name='code' class='JScript'>
+[
+	{
+		이름 = "Kim"
+		점수 = 228.56
+	},
+	{
+		이름 = "Asada"
+		점수 = 205.50
+	},
+	{
+		이름 = "Rochette"
+		점수 = 202.64
+	}
+]
+</pre>
+<p class=indent1> A에 비해서 B가 사람이 읽기 쉽고, 실수했을 경우 잘못을 찾아내기 쉽다. 중간에 데이터를 끼워넣기도 쉽다: 읽고자 하는 항목이 없을 경우 디폴트값을 사용하면 된다. 중첩된 구조도 표현하기 쉽다. 좀 까다롭긴 하지만 상호 참조하는 구조도 만들 수 있다.</p>
+<p class='emptyLine'></p>
+<p class=indent1> 이전 글(<A href='InhouseTool1.html' class=internalLink>인하우스 툴 만들기</A>)에서 XML을 추천했었다. 추천 이유는 이미 관련 도구들이 많이 나와 있다는 것이다. 어떤 언어에서든 해석기 라이브러리가 만들어져 있다. 에디터도 많이 있다. 바이너리 표현도 있다고 한다(써보진 않았다). 문법 오류를 확인해주는 도구도 있다. 그러나 단점도 있다: 텍스트 에디터로 쓸/읽을 경우 군더더기가 많다.</p>
+<p class='emptyLine'></p>
+<p class=indent1> 우리는 자체 포맷을 사용했기 때문에 관련 라이브러리와 도구를 많이 만들어야 했다. 그러나 최종 결과물에 불만은 전혀 없다.</p>
+<p class='emptyLine'></p>
+<p class=indent1> JSON의 경우 라이브러리를 구하기 쉽고 가독성이 좋다. XML에 비해 용량도 적게 차지한다. 그러나 필요한 도구는 직접 만들어야 할 거다.</p>
+<p class='emptyLine'></p>
+<li>언두, 리두</li>
+<p class=indent1> 맞다. 구현하기도 어렵고 시간도 오래 걸린다. 하지만 비싼 값을 한다. 게임개발의 꽃이 스킬이라면 툴개발의 꽃은 언두라고 생각한다(컴공 학부의 꽃은 컴파일러ㅋㅋ다). 하지만 모든 툴에 필요한 건 아닌 듯하다. 대충 나누어 보자면 감각적인 편집이 필요한 곳에는 언두가 꼭 필요하고(포토샵, 3dmax, 텍스트 편집기), 작은 단위로 편집하고 반영하는 곳에는 그다지 필요하지 않다고 본다(윈도우 제어판, 인쇄 설정).</p>
+<p class='emptyLine'></p>
+<p class=indent1> 언두/리두는 모든 다른 기능을 가로지르는 기능이기 때문에, 설계를 잘 해야 한다. 반면에, 구현하기 영 귀찮고 자주 안 쓰인다 싶은 기능에 대해서는 "이 동작은 되돌릴 수 없습니다." 정도의 메세지를 띄우는 정도로 타협해도 된다.</p>
+<p class='emptyLine'></p>
+<p class=indent1> 여담으로, 클로저를 편하게 쓸 수 있는 언어로 툴을 만들면 적어도 언두/리두는 편하게 구현할 수 있을 것 같다. 요즘 루아로 프로그래밍하다가 C++로 돌아오면 클로저를 너무너무 쓰고 싶-_-다.</p>
+<p class='emptyLine'></p>
+<p class=indent1> + 2010-6-11 추가: 언두/리두는 전체 상태를 저장하는 방식으로 구현할 수 있고, diff-based로 구현할 수 있다. 후자가 속도나 메모리면에서 당연히 뛰어나지만, 훨씬 구현하기 귀찮다.</p>
+<p class='emptyLine'></p>
+<li>광야에 나가면</li>
+<p class=indent1> 서비스를 몇 달 안 하고 게임이 접혔지만, 당시 디렉터가 다년간의 라이브 서비스 경험을 바탕으로 미리 조언해준 덕택에 이것저것 준비할 수 있었다. 시간의 시험을 통과하거나 깊이있는 경험을 쌓은 것은 아니나 일단 써본다. </p>
+<p class='emptyLine'></p>
+<p class=indent1> 실제 유저에게 서비스를 할 때 계속 반복되는 단순 작업들이 있다. 서비스하는 기계에 파일 보내기, 서버 내리기, 서버 띄우기, 죽은 서버 다시 살리기, 윈도업데이트, DB 동기화, 시간 맞추기, ipsec 적용… 서버 대수가 많아짐에 따라 귀찮음이 선형으로 증가하는 일들이다. 우리는 서버 4대까지 전부 손으로 세팅하다가 서버가 12대가 되면서 GG 치고 자동화했다. 서버들에 sshd를 설치하고 원격에서 커맨드라인 명령을 내릴 수 있게 되면 배치파일을 가지고 이것저것 할 수 있게 된다. 특히 외부 툴을 쉽게 붙일 수 있는 점이 좋다.</p>
+<p class='emptyLine'></p>
+<p class=indent1> DB 동기화는 아주 실수하기 쉬운 부분이다. 개발중에 팀내 개발DB에서 SP나 테이블을 바꾸고 그에 맞춰 코드를 수정했는데 서비스 DB에 동일한 변경을 가하지 않았다면, 서버가 잘 돌다가 문제있는 부분을 수행하는 순간 오작동하게 된다. MSSQLServer를 쓸 경우 DB에 변경을 가할 때마다 SSMS가 자동으로 change script를 뽑아주긴 하지만, 저장하거나 적용하는 걸 빼먹으면 서비스에서 실제로 사고가 터지기 전에는 실수를 했는지조차 알 수 없다는 게 굉장히 무섭다. ApexSQL Diff라는 툴이 DB간의 diff를 떠 주던데, 무료도 아닌데다 커맨드라인으로 붙이기가 곤란해서, 그 툴이 제공하는 기능의 일부를 T-SQL 코드로 직접 짜서 패치과정에 넣었다. 서버프로그래머가 꽤 고생했으니 그리 간단한 일은 아니었던 듯하다.</p>
+<p class='emptyLine'></p>
+<p class=indent1> ipsec은 원래 보안이 적용된 IP 프로토콜이라고 학부 네트워크 과정에서 배우지만, 윈도우 서버에서 일종의 방화벽처럼 쓸 수 있다. 시작-실행-secpol.msc를 해보도록 하자. 발신/수신 IP주소/포트의 조합에 대해 차단 여부를 지정할 수 있어서, 관리 포트를 개발망에만 접속 허용한다거나 할 수 있다. 다만 설정하기가 정말……정말 귀찮다. 전부 막고 필요한 포트만 딱 열어주려면 항목이 상당히 많아지게 되는데, 설정 인터페이스가 너무 귀찮아서 뭔가 바뀔 때마다 서버 대수만큼 적용하고 있노라면 내가 게임 서비스를 하는 것인지 도 닦고 있는 것인지 헷갈린다. 잘 찾아보면 커맨드라인에서 ipsec 설정하는 방법이 있다. 이것도 당시 담당했던 프로그래머가 꽤 시행착오를 거쳐서 알아냈다. ipsec 설정을 배치파일로 만들어두고 모든 서버에 일괄 반영하면 패치 담당자의 삶이 편해진다.</p>
+<p class='emptyLine'></p>
+<p class=indent1> 윈도업데이트도 커맨드라인에서 하는 스크립트를 찾아내긴 했는데, 업데이트 후 재부팅이 필요한 경우 어떻게 동작하는지 확인하지 못했고, 선택적 업데이트를 안 물어보고 바로 설치해버려서, 잠깐 쓰다 말았다. 윈도 업데이트는 자주 있는 일이 아니므로 패치 당번 프로그래머가 몇 대씩 맡아서 손으로 업데이트해도 별로 귀찮지 않았다.</p>
+<p class='emptyLine'></p>
+<p class=indent1> 서버들의 시간을 미리 맞춰두지 않으면 사고 터지고 나서 로그 분석할 때 정말 신경질나게 된다. 시간을 계속 동기화하는 데몬을 돌려두든지, 점검할 때 자동으로 시간을 맞춰주도록 하자.</p>
+<p class='emptyLine'></p>
+<p class=indent1> 동접 모니터링과 기록은 기본이다. 서버가 잘 동작하고 있는지 아닌지도 언제나 확인할 수 있어야 한다.</p>
+<p class='emptyLine'></p>
+<p class=indent1> 윈도우 서버들을 도메인으로 묶으면 좋다......는 얘기를 들은 적이 있다. 위에 적은 많은 것들이 도메인을 적용하면 편해질지도 모른다. 해보신 분들의 경험담을 기대한다.</p>
+
+			</div>
+		</div>
+		<div class=nav>
+			<a href='.' class=nav>목록으로</a>
+		</div>
+	</div>
+	<script class="javascript" src="syntax/shCore.js"></script> 
+	<script class="javascript" src="syntax/shBrushCSharp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCpp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCss.js"></script> 
+	<script class="javascript" src="syntax/shBrushDelphi.js"></script> 
+	<script class="javascript" src="syntax/shBrushJScript.js"></script> 
+	<script class="javascript" src="syntax/shBrushJava.js"></script> 
+	<script class="javascript" src="syntax/shBrushPhp.js"></script> 
+	<script class="javascript" src="syntax/shBrushPython.js"></script> 
+	<script class="javascript" src="syntax/shBrushRuby.js"></script> 
+	<script class="javascript" src="syntax/shBrushSql.js"></script> 
+	<script class="javascript" src="syntax/shBrushVb.js"></script> 
+	<script class="javascript" src="syntax/shBrushXml.js"></script> 
+	<script class="javascript"> 
+		dp.SyntaxHighlighter.ClipboardSwf = 'syntax/clipboard.swf';
+		dp.SyntaxHighlighter.HighlightAll('code');
+	</script>
+
+
+
+</body>
+</html>

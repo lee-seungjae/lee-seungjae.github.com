@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		
+			greenlet은 어떻게 구현했을까?
+		
+	</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
+	<LINK rel='STYLESHEET' type='text/css' href='syntax/SyntaxHighlighter.css'>
+	<style>
+		body { font-family: "Malgun Gothic"; font-size:13pt; color:#000000; line-height:160%; }
+		.quote { font-size: 13pt; background-color:#f0f0f0; border:1px solid #e0e0e0; font-family: "Malgun Gothic"; padding: 10pt; }
+		h1 { font-size: 12pt; }
+		.bigh1 {
+			font-size: 18pt;
+		}
+		h2 { font-size: 14pt; }
+		h3 { font-size: 13pt; }
+		h4 { font-size: 12pt; }
+		p { padding: 0; margin: 0; }
+		.center {
+			max-width: 600pt;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.title {
+			text-align: left;
+		}
+		.date {
+			font-size: 11pt;
+			color: gray;
+			margin-bottom: 40pt;
+		}
+		.text {}
+		.page {
+			border-radius: 12pt;
+			background:#ffffff;
+			padding-top: 40pt;
+			padding-left: 40pt;
+			padding-right: 40pt;
+			padding-bottom: 40pt;
+			margin-bottom: 20pt;
+			-moz-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
+			-webkit-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
+			box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
+		}
+		.nav {
+			text-align: center;
+			color: #6699ff;
+		}
+		.internalLink {
+			color: #6699ff;
+		}
+		.externalLink {
+			color: #008000;
+		}
+		.linkToTop {
+			color: black;
+		}
+		.emptyLine {
+			height: 10pt;
+		}
+		.indent1 { margin-left: 10pt; }
+		.indent2 { margin-left: 20pt; }
+		.indent3 { margin-left: 30pt; }
+		.indent4 { margin-left: 40pt; }
+		.indent5 { margin-left: 50pt; }
+		hr { width: 90%; border:0; border-bottom:1px #aaaaaa dashed }
+	</style>
+</head>
+
+<body bgcolor="#444444" style='margin:30pt'>
+
+	<div class=center>
+		<div class=page>
+			<div class=title>
+				<h1>
+					<a href='/' class=linkToTop>lee-seungjae.github.com</a>
+					<a href='rss.xml'><img src='feed16.gif'></a>
+					<br>
+					<font class=bigh1>greenlet은 어떻게 구현했을까?</font>
+				</h1>
+			</div>
+			<div class=date>
+				2011-10-07
+			</div>
+			<div class=text>
+				<p>지난번 글 <A href='WebServerArchitecture.html' class=internalLink>웹서버 아키텍처와 프로그래밍 모델의 진화</A>에 이런 내용이 있었다:</p>
+<p class='emptyLine'></p>
+<p class=indent1> 원래 파이썬에는 코루틴이 없는데, 변종 파이썬 인터프리터인 스택리스 파이썬이 코루틴을 지원했고, 이것을 기본 파이썬 인터프리터에서 사용할 수 있도록 모듈 형태로 만든 것이 greenlet이다.</p>
+<p class='emptyLine'></p>
+<p class='emptyLine'></p>
+<p>자, 스택리스 파이썬은 코루틴(마이크로스레드)을 지원하게 하기 위해서 인터프리터를 뜯어고쳐야 했다. 그런데, greenlet은 이걸 모듈 형태로 만들었다! 대체 어떻게 했을까? 궁금해지는 제작진, greenlet의 소스를 열어 보았다.</p>
+<p class='emptyLine'></p>
+<p>결론부터 말하면, 구현 방법이 전혀 다르다. greenlet은 A 코루틴에서 B 코루틴으로 넘어가야 할 때 A 코루틴이 사용한 스택을 다른 곳에 저장해 두고 B 코루틴이 사용하던 스택을 현재 스택 위치에 가져온다. 스택을 어떻게 옮기나? memcpy로! 이게 끝이다. 스택리스 파이썬은 CPython(파이썬의 정통 구현)이 C 스택에 의존하던 것을 그렇지 않도록 바꿨다고 하니 아마 엄청나게 고쳤을 텐데, greenlet은 CPython 인터프리터 코드를 그대로 놔둔 상태로 낮은 레벨에서 스택만 바꿔치기한 것이다. 대단한 꼼수다. greenlet이 스택리스 파이썬에 비해 좀 느리다고 하는데, 이런 구조라면 코루틴 문맥 전환할 때마다 매번 memcpy가 필요하니 느린 것도 당연해 보인다.</p>
+<p class='emptyLine'></p>
+<p>greenlet implementation으로 검색해 보면 <A href='http://www.stackless.com/pipermail/stackless-dev/2004-March/000022.html' class=externalLink>&#91;Stackless-sprint&#93; On greenlets</A> 라는 메일이 뜬다.  스택리스 파이썬의 저자인 Christian Tismer가 Armin Rigo의 아이디어를 듣고 흥분해서 보낸 메일이다.. 몇년동안 고생고생해가며 스택리스 파이썬 개발하다가 전혀 다른 데서 훨씬 간단한 해법을 알았으니 기분이 어땠을까.</p>
+<p class='emptyLine'></p>
+<p class='emptyLine'></p>
+<p>그런데 왜 문맥 전환을 할 때 스택을 통째로 복사할까? 스택을 아예 다른 곳에 잡아 놓고서 문맥 전환할 떄는 레지스터만 저장했다가 복구하면 될 텐데.</p>
+<p class='emptyLine'></p>
+<p><A href='http://code.google.com/p/coev/' class=externalLink>coev</A>가 이 의문에 대한 답을 제공한다. 무려 <A href='http://code.google.com/p/coev/wiki/GreenletProblems' class=externalLink>그린렛 문제：그린렛은 구리다 - 나는 왜 그렇게 생각하는가 (영어)</A> 라는 글에서 그린렛을 몹시 까고 있다. greenlet은 문맥 전환을 직접 구현했기 때문에 이식성이 떨어지고 메모리 복사/할당/해제 오버헤드가 큰 반면, coev는 swapcontext를 써서 그런 문제가 없다는 얘기다.</p>
+<p class='emptyLine'></p>
+<p>2011년 봄에 달린 리플에 따르면 오히려 greenlet이 압도적으로 빠르다고 한다. 이유는 swapcontext가 시그널 핸들러 저장/복구하면서 시스템 콜을 하기 때문에. 아 망했어요~</p>
+<p class='emptyLine'></p>
+<hr/><p class='emptyLine'></p>
+<p>지난번 글에서 언급하는 걸 잊어버리고 그냥 넘어갔는데 node.js를 비롯해서 코루틴/클로저로 네트워크 애플리케이션을 만든다는 발상은 많은 부분 데스크탑 히어로즈를 만드는 과정에서 @ehooi의 영향을 받은 것이다.</p>
+
+			</div>
+		</div>
+		<div class=nav>
+			<a href='.' class=nav>목록으로</a>
+		</div>
+	</div>
+	<script class="javascript" src="syntax/shCore.js"></script> 
+	<script class="javascript" src="syntax/shBrushCSharp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCpp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCss.js"></script> 
+	<script class="javascript" src="syntax/shBrushDelphi.js"></script> 
+	<script class="javascript" src="syntax/shBrushJScript.js"></script> 
+	<script class="javascript" src="syntax/shBrushJava.js"></script> 
+	<script class="javascript" src="syntax/shBrushPhp.js"></script> 
+	<script class="javascript" src="syntax/shBrushPython.js"></script> 
+	<script class="javascript" src="syntax/shBrushRuby.js"></script> 
+	<script class="javascript" src="syntax/shBrushSql.js"></script> 
+	<script class="javascript" src="syntax/shBrushVb.js"></script> 
+	<script class="javascript" src="syntax/shBrushXml.js"></script> 
+	<script class="javascript"> 
+		dp.SyntaxHighlighter.ClipboardSwf = 'syntax/clipboard.swf';
+		dp.SyntaxHighlighter.HighlightAll('code');
+	</script>
+
+
+
+</body>
+</html>

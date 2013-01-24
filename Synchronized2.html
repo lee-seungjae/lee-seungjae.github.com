@@ -3,7 +3,7 @@
 <head>
 	<title>
 		
-			NDC11 - 온라인 게임 처음부터 끝까지 동적언어로 만들기
+			improved synchronized block in C++
 		
 	</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -80,18 +80,65 @@
 					<a href='/' class=linkToTop>lee-seungjae.github.com</a>
 					<a href='rss.xml'><img src='feed16.gif'></a>
 					<br>
-					<font class=bigh1>NDC11 - 온라인 게임 처음부터 끝까지 동적언어로 만들기</font>
+					<font class=bigh1>improved synchronized block in C++</font>
 				</h1>
 			</div>
 			<div class=date>
-				2011-06-08
+				2005-08-11
 			</div>
 			<div class=text>
-				
-<div style="width:700px" id="__ss_8242308"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/SeungjaeLee3/ss-8242308" title="온라인 게임 처음부터 끝까지 동적언어로 만들기">온라인 게임 처음부터 끝까지 동적언어로 만들기</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/8242308" width="700" height="583" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/SeungjaeLee3">Seungjae Lee</a> </div> </div><p class='emptyLine'></p>
-<p>2011년 6월 2일, 50분 세션.</p>
+				<p>관련글: <A href='Synchronized1.html' class=internalLink>synchronized block in C++</A></p>
+<p class='emptyLine'></p>
+<p>전에 썼던 synchronized block에 문제가 있습니다.</p>
+<p class='emptyLine'></p>
+<pre name='code' class='Cpp'>
+synchronized(aLock)
+	a.someMethod();
+else
+	b.someMethod();
+</pre>
+<p class='emptyLine'></p>
+<p>이런 코드가 컴파일된다는 건데요.</p>
+<p>누가 이런 코드를 쓰겠냐, 라고 말씀하실 분도 계실지 모르지만, 다음 코드를 보세요.</p>
+<p class='emptyLine'></p>
+<pre name='code' class='Cpp'>
+if( someCondition )
+	synchronized(aLock) a.someMethod();
+else
+	b.someMethod();
+</pre>
+<p class='emptyLine'></p>
+<p>조건을 만족하면 락을 걸고 a.someMethod(),</p>
+<p>만족하지 않으면 b.someMethod()라는 뜻이죠.</p>
+<p class='emptyLine'></p>
+<p>이게 전처리기를 거치면 다음과 같이 전개됩니다. (임의로 인덴트했어요)</p>
+<p class='emptyLine'></p>
+<pre name='code' class='Cpp'>
+if( someCondition )
+	if( AutoLock _syncVar = A )
+		a.someMethod();
+	else
+		b.someMethod();
+</pre>
+<p class='emptyLine'></p>
+<p>조건을 만족하면, 락을 걸고 a.someMethod(),</p>
+<p>만족하지 않으면 아무것도 안 함.</p>
+<p class='emptyLine'></p>
+<p>어머! 뜻이 바뀌었네요! ;ㅁ;;;;</p>
+<p class='emptyLine'></p>
+<p>이렇게 고치면 문제가 해결되지요.</p>
+<p class='emptyLine'></p>
+<pre name='code' class='Cpp'>
+operator bool()
+{
+	return false;
+}
+
+#define synchronized(A)     if( AutoLock _syncVar = A ) assert( 0 ); else
+</pre>
 <p class='emptyLine'></p>
 <p class='emptyLine'></p>
+<p>몇 년 전에 synchronized() 매크로에 관해 얘기해준 친구(탱이)가 알려주었습니다. 감사 'ㅁ'/</p>
 
 			</div>
 		</div>

@@ -8,8 +8,10 @@
 	</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
+	<LINK rel='STYLESHEET' type='text/css' href='syntax/SyntaxHighlighter.css'>
 	<style>
 		body { font-family: "Malgun Gothic"; font-size:13pt; color:#000000; line-height:160%; }
+		.quote { font-size: 13pt; background-color:#f0f0f0; border:1px solid #e0e0e0; font-family: "Malgun Gothic"; padding: 10pt; }
 		h1 { font-size: 12pt; }
 		.bigh1 {
 			font-size: 18pt;
@@ -49,7 +51,10 @@
 			color: #6699ff;
 		}
 		.internalLink {
-			color: #4477ff;
+			color: #6699ff;
+		}
+		.externalLink {
+			color: #008000;
 		}
 		.linkToTop {
 			color: black;
@@ -57,6 +62,12 @@
 		.emptyLine {
 			height: 10pt;
 		}
+		.indent1 { margin-left: 10pt; }
+		.indent2 { margin-left: 20pt; }
+		.indent3 { margin-left: 30pt; }
+		.indent4 { margin-left: 40pt; }
+		.indent5 { margin-left: 50pt; }
+		hr { width: 90%; border:0; border-bottom:1px #aaaaaa dashed }
 	</style>
 </head>
 
@@ -84,30 +95,30 @@
 <h2>참고문헌</h2>
 <p class='emptyLine'></p>
 <p>서버 푸시 개념 정리</p>
-<li>http://en.wikipedia.org/wiki/Push_technology</li>
+<li><a href='http://en.wikipedia.org/wiki/Push_technology' class=externalLink>http://en.wikipedia.org/wiki/Push_technology</a></li>
 <p class='emptyLine'></p>
 <p>Comet 기법 소개</p>
-<li>http://en.wikipedia.org/wiki/Comet_(programming)</li>
+<li><a href='http://en.wikipedia.org/wiki/Comet_(programming)' class=externalLink>http://en.wikipedia.org/wiki/Comet_(programming)</a></li>
 <p class='emptyLine'></p>
 <p>WebSocket 표준화, 브라우저 지원 현황</p>
-<li>http://en.wikipedia.org/wiki/WebSocket</li>
+<li><a href='http://en.wikipedia.org/wiki/WebSocket' class=externalLink>http://en.wikipedia.org/wiki/WebSocket</a></li>
 <p class='emptyLine'></p>
 <p>WebSocket과 Socket.io</p>
-<li>http://helloworld.naver.com/helloworld/1336</li>
+<li><a href='http://helloworld.naver.com/helloworld/1336' class=externalLink>http://helloworld.naver.com/helloworld/1336</a></li>
 <p class='emptyLine'></p>
 <p>HTTP Streaming(Hidden iframe)자세히 설명</p>
-<li>http://ajaxpatterns.org/HTTP_Streaming</li>
+<li><a href='http://ajaxpatterns.org/HTTP_Streaming' class=externalLink>http://ajaxpatterns.org/HTTP_Streaming</a></li>
 <p class='emptyLine'></p>
 <p>HTTP Streaming(Hidden iframe)의 문제점들</p>
-<li>http://www.quora.com/Why-would-HTTP-long-polling-be-used-instead-of-HTTP-Streaming-to-achieve-real-time-push-notifications</li>
+<li><a href='http://www.quora.com/Why-would-HTTP-long-polling-be-used-instead-of-HTTP-Streaming-to-achieve-real-time-push-notifications' class=externalLink>http://www.quora.com/Why-would-HTTP-long-polling-be-used-instead-of-HTTP-Streaming-to-achieve-real-time-push-notifications</a></li>
 <p class='emptyLine'></p>
 <p>GMail의 구현 설명</p>
-<li>http://www.ekhoury.com/blog/2007/02/07/ajax-alternatives-gmail-choice/</li>
-<li>http://stackoverflow.com/questions/2481696/how-does-gmail-implement-comet</li>
+<li><a href='http://www.ekhoury.com/blog/2007/02/07/ajax-alternatives-gmail-choice/' class=externalLink>http://www.ekhoury.com/blog/2007/02/07/ajax-alternatives-gmail-choice/</a></li>
+<li><a href='http://stackoverflow.com/questions/2481696/how-does-gmail-implement-comet' class=externalLink>http://stackoverflow.com/questions/2481696/how-does-gmail-implement-comet</a></li>
 <p class='emptyLine'></p>
 <p>미들웨어 관련</p>
-<li>http://orbited.org/</li>
-<li>http://socket.io/</li>
+<li><a href='http://orbited.org/' class=externalLink>http://orbited.org/</a></li>
+<li><a href='http://socket.io/' class=externalLink>http://socket.io/</a></li>
 <p class='emptyLine'></p>
 <p class='emptyLine'></p>
 
@@ -117,6 +128,23 @@
 			<a href='.' class=nav>목록으로</a>
 		</div>
 	</div>
+	<script class="javascript" src="syntax/shCore.js"></script> 
+	<script class="javascript" src="syntax/shBrushCSharp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCpp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCss.js"></script> 
+	<script class="javascript" src="syntax/shBrushDelphi.js"></script> 
+	<script class="javascript" src="syntax/shBrushJScript.js"></script> 
+	<script class="javascript" src="syntax/shBrushJava.js"></script> 
+	<script class="javascript" src="syntax/shBrushPhp.js"></script> 
+	<script class="javascript" src="syntax/shBrushPython.js"></script> 
+	<script class="javascript" src="syntax/shBrushRuby.js"></script> 
+	<script class="javascript" src="syntax/shBrushSql.js"></script> 
+	<script class="javascript" src="syntax/shBrushVb.js"></script> 
+	<script class="javascript" src="syntax/shBrushXml.js"></script> 
+	<script class="javascript"> 
+		dp.SyntaxHighlighter.ClipboardSwf = 'syntax/clipboard.swf';
+		dp.SyntaxHighlighter.HighlightAll('code');
+	</script>
 
 
 
