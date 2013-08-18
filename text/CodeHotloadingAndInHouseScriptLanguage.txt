@@ -1,0 +1,13 @@
+﻿# NDC13 - M2 AI코드 개발 생산성 향상 사례
+
+* 작성: 2013-04-28
+* 최종수정: 2013-04-28
+* 태그: NDC
+
+<TAG>
+<iframe src="http://www.slideshare.net/slideshow/embed_code/19986914?rel=0" width="687" height="486" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="http://www.slideshare.net/devcatpublications/m2-ai-ndc2013" title="이승재, M2 AI코드 개발 생산성 향상 사례, NDC2013" target="_blank">이승재, M2 AI코드 개발 생산성 향상 사례, NDC2013</a> </strong> from <strong><a href="http://www.slideshare.net/devcatpublications" target="_blank">devCAT Studio, NEXON</a></strong> </div>
+</TAG>
+
+2013년 4월 24일, 50분 세션.
+
+
