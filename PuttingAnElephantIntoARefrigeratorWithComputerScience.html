@@ -3,7 +3,7 @@
 <head>
 	<title>
 		
-			improved synchronized block in C++
+			전산학에서 코끼리를 냉장고에 넣는 방법들
 		
 	</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -82,65 +82,90 @@
 					<a href='index.html' class=linkToTop>lee-seungjae.github.com</a>
 					<a href='rss.xml'><img src='feed16.gif'></a>
 					<br>
-					<font class=bigh1>improved synchronized block in C++</font>
+					<font class=bigh1>전산학에서 코끼리를 냉장고에 넣는 방법들</font>
 				</h1>
 			</div>
 			<div class=date>
-				2005-08-11
+				2006-04-21
 			</div>
 			<div class=text>
-				<p>관련글: <A href='Synchronized1.html' class=internalLink>synchronized block in C++</A></p>
+				<p>대학원생</p>
+<div class=quote>
+[15:23] &lt;lazyboy&gt; 학생들에게 숙제로 내준다<br/>
+[15:23] &lt;lazyboy&gt; 못하겠다고 아우성이면 스펙을 조금 수정한다<br/>
+[15:23] &lt;안젤리카☆&gt; 숙제 반영 비율을 올린다고 공지하고 게시판에는 신경을 끈다<br/>
+[15:24] &lt;안젤리카☆&gt; 마감이 지나면 냉장고를 걷는다<br/>
+[15:24] &lt;ipkn&gt; 코끼리를 냉장고에넣는건 성공하면 그레이드 한단계 올려준다고 한다<br/>
+[15:24] &lt;유키&gt; 노.<br/>
+[15:24] &lt;유키&gt; 두 단계.<br/>
+[15:24] &lt;유키&gt; :)<br/>
+[15:24] &lt;lazyboy&gt; 챌린지<br/>
+[15:24] &lt;lazyboy&gt; 이 문제를 풀면 최종성적이 두 단계 상승합니다.<br/>
+</div>
 <p class='emptyLine'></p>
-<p>전에 썼던 synchronized block에 문제가 있습니다.</p>
+<p>컴퓨터 네트워크</p>
+<div class=quote>
+[15:25] &lt;안젤리카☆&gt; ip fragmentation field를 적절히 활용하여<br/>
+[15:26] &lt;안젤리카☆&gt; 여러 개의 냉장고에 분산한다.<br/>
+</div>
 <p class='emptyLine'></p>
-<pre name='code' class='Cpp'>
-synchronized(aLock)
-	a.someMethod();
-else
-	b.someMethod();
-</pre>
+<p>ICPC World Final</p>
+<div class=quote>
+[15:26] &lt;lazyboy&gt; ICPC A번 문제로 낸다<br/>
+[15:26] &lt;lazyboy&gt; 중국 애들이 푼다<br/>
+</div>
 <p class='emptyLine'></p>
-<p>이런 코드가 컴파일된다는 건데요.</p>
-<p>누가 이런 코드를 쓰겠냐, 라고 말씀하실 분도 계실지 모르지만, 다음 코드를 보세요.</p>
+<p>선형대수학 1</p>
+<div class=quote>
+[15:27] &lt;유키&gt; 코끼리를 eigen-vector 로 갖는 linear transformation 을 찾고 그 eigen-value 가 1이하이면 코끼리를 transformation 으로 보낸 다음에 집어넣는다. 단, 냉장고는 보내지 않는다.<br/>
+</div>
 <p class='emptyLine'></p>
-<pre name='code' class='Cpp'>
-if( someCondition )
-	synchronized(aLock) a.someMethod();
-else
-	b.someMethod();
-</pre>
+<p>선형대수학 2</p>
+<div class=quote>
+[15:27] &lt;과방옆N&gt; 코끼리의 basis만 구해서 냉장고에 넣고 span한다.<br/>
+</div>
 <p class='emptyLine'></p>
-<p>조건을 만족하면 락을 걸고 a.someMethod(),</p>
-<p>만족하지 않으면 b.someMethod()라는 뜻이죠.</p>
+<p>프로그램 분석</p>
+<div class=quote>
+[15:28] &lt;lazyboy&gt; 냉장고분석기술이란<br/>
+[15:29] &lt;lazyboy&gt; 냉장고가 수행시간에 가질 수 있는 모든 코끼리들을<br/>
+[15:29] &lt;lazyboy&gt; 유한시간 내에<br/>
+[15:29] &lt;lazyboy&gt; 안전하게 어림잡는 기술<br/>
+</div>
 <p class='emptyLine'></p>
-<p>이게 전처리기를 거치면 다음과 같이 전개됩니다. (임의로 인덴트했어요)</p>
+<p>데이터통신</p>
+<div class=quote>
+[15:35] &lt;안젤리카☆&gt; 각 냉장고를 narrow-band 하나씩으로 할당하고, 충분히 많은 냉장고를 확보한 후 코끼리를 spread spectrum으로 인코딩해서 보낸다.<br/>
+</div>
 <p class='emptyLine'></p>
-<pre name='code' class='Cpp'>
-if( someCondition )
-	if( AutoLock _syncVar = A )
-		a.someMethod();
-	else
-		b.someMethod();
-</pre>
+<p>컴파일러</p>
+<div class=quote>
+[15:36] &lt;유키&gt; 무리하더라도 -O6 를 달고 코끼리를 재컴파일하여 사이즈를 줄인다.<br/>
+</div>
 <p class='emptyLine'></p>
-<p>조건을 만족하면, 락을 걸고 a.someMethod(),</p>
-<p>만족하지 않으면 아무것도 안 함.</p>
+<p>계산이론 1</p>
+<div class=quote>
+[15:36] &lt;lazyboy&gt; 계산이론 : 냉장고 = 코끼리 문제는 아직 해결되지 않은 문제입니다.<br/>
+</div>
 <p class='emptyLine'></p>
-<p>어머! 뜻이 바뀌었네요! ;ㅁ;;;;</p>
+<p>문병로교수님</p>
+<div class=quote>
+[15:37] &lt;lazyboy&gt; 학생 : 교수님 코끼리를 냉장고에 넣으면 무슨 의미가 있나요?<br/>
+[15:37] &lt;lazyboy&gt; 문병로교수님 : 기분이 좋습니다~<br/>
+</div>
 <p class='emptyLine'></p>
-<p>이렇게 고치면 문제가 해결되지요.</p>
+<p>메모리 세그먼테이션</p>
+<div class=quote>
+[15:38] &lt;유키&gt; 코끼리를 잘게 쪼갠 다음 각각으로 링크드 리스트의 노드를 구성한 다음, head만 냉장고에 넣고 포인터는 밖으로 빼낸다<br/>
+[15:38] &lt;발당&gt; 코끼리를 잘게 쪼개는 과정이 가역변화인지부터 확인해야...<br/>
+</div>
 <p class='emptyLine'></p>
-<pre name='code' class='Cpp'>
-operator bool()
-{
-	return false;
-}
-
-#define synchronized(A)     if( AutoLock _syncVar = A ) assert( 0 ); else
-</pre>
+<p>계산이론 2</p>
+<div class=quote>
+[15:43] &lt;안젤리카☆&gt; 코끼리가 토끼로 poly-time reducible함을 보인다<br/>
+[15:43] &lt;안젤리카☆&gt; 토끼를 다항시간에 냉장고에 넣는 알고리즘을 개발한다<br/>
+</div>
 <p class='emptyLine'></p>
-<p class='emptyLine'></p>
-<p>몇 년 전에 synchronized() 매크로에 관해 얘기해준 친구(탱이)가 알려주었습니다. 감사 'ㅁ'/</p>
 
 			</div>
 		</div>
