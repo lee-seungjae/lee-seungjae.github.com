@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		
+			Array(Vector) vs HashMap
+		
+	</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
+	<LINK rel='STYLESHEET' type='text/css' href='syntax/SyntaxHighlighter.css'>
+	<style>
+		body { font-family: "Malgun Gothic"; font-size:13pt; color:#000000; line-height:160%; letter-spacing: -1pt;
+}
+		.quote { font-size: 13pt; background-color:#f0f0f0; border:1px solid #e0e0e0; font-family: "Malgun Gothic"; padding: 10pt; }
+		h1 { font-size: 12pt; }
+		.bigh1 {
+			font-size: 18pt;
+		}
+		h2 { font-size: 14pt; }
+		h3 { font-size: 13pt; }
+		h4 { font-size: 12pt; }
+		p { padding: 0; margin: 0; }
+		.center {
+			max-width: 600pt;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.title {
+			text-align: left;
+		}
+		.date {
+			font-size: 11pt;
+			color: gray;
+			margin-bottom: 40pt;
+		}
+		.text {
+		}
+		.page {
+			border-radius: 12pt;
+			background:#ffffff;
+			padding-top: 40pt;
+			padding-left: 40pt;
+			padding-right: 40pt;
+			padding-bottom: 40pt;
+			margin-bottom: 20pt;
+			-moz-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
+			-webkit-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
+			box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
+		}
+		.nav {
+			text-align: center;
+			color: #6699ff;
+		}
+		.internalLink {
+			color: #6699ff;
+		}
+		.externalLink {
+			color: #008000;
+		}
+		.linkToTop {
+			color: black;
+		}
+		.emptyLine {
+			height: 10pt;
+		}
+		.indent1 { margin-left: 10pt; }
+		.indent2 { margin-left: 20pt; }
+		.indent3 { margin-left: 30pt; }
+		.indent4 { margin-left: 40pt; }
+		.indent5 { margin-left: 50pt; }
+		hr { width: 90%; border:0; border-bottom:1px #aaaaaa dashed }
+	</style>
+</head>
+
+<body bgcolor="#444444" style='margin:30pt'>
+
+	<div class=center>
+		<div class=page>
+			<div class=title>
+				<h1>
+					<a href='index.html' class=linkToTop>lee-seungjae.github.com</a>
+					<a href='rss.xml'><img src='feed16.gif'></a>
+					<br>
+					<font class=bigh1>Array(Vector) vs HashMap</font>
+				</h1>
+			</div>
+			<div class=date>
+				2012-06-21
+			</div>
+			<div class=text>
+				<p>삽입/삭제 패턴이 어떻게 되나?</p>
+<p>조회 패턴이 어떻게 되나?</p>
+<p>얼마나 많은 원소를 담아야 하나?</p>
+<p>얼마나 많은 메모리 오버헤드를 감수할 수 있나?</p>
+<p>담을 원소의 크기는 얼마나 큰가?</p>
+<p>복사 비용이 얼마나 비싼가?</p>
+<p>해쉬 계산 함수의 비용이 얼마나 비싼가?</p>
+<p>동등성 확인 비용이 얼마나 비싼가?</p>
+<p>해쉬맵 구현체의 내부가 어떻게 생겼나?</p>
+<p class='emptyLine'></p>
+<p class='emptyLine'></p>
+<p>그리고,</p>
+<p class='emptyLine'></p>
+<p>이런 고민을 해야 할 정도로 성능이 중요한 프로그램인가?</p>
+<p>이런 고민을 해야 할 정도로 성능이 중요한 부분인가?</p>
+<p class='emptyLine'></p>
+<p class='emptyLine'></p>
+<p>답보다 질문이 중요하다.</p>
+
+			</div>
+		</div>
+		<div class=nav>
+			<a href='index.html' class=nav>목록으로</a>
+		</div>
+	</div>
+	<script class="javascript" src="syntax/shCore.js"></script> 
+	<script class="javascript" src="syntax/shBrushCSharp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCpp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCss.js"></script> 
+	<script class="javascript" src="syntax/shBrushDelphi.js"></script> 
+	<script class="javascript" src="syntax/shBrushJScript.js"></script> 
+	<script class="javascript" src="syntax/shBrushJava.js"></script> 
+	<script class="javascript" src="syntax/shBrushPhp.js"></script> 
+	<script class="javascript" src="syntax/shBrushPython.js"></script> 
+	<script class="javascript" src="syntax/shBrushRuby.js"></script> 
+	<script class="javascript" src="syntax/shBrushSql.js"></script> 
+	<script class="javascript" src="syntax/shBrushVb.js"></script> 
+	<script class="javascript" src="syntax/shBrushXml.js"></script> 
+	<script class="javascript"> 
+		dp.SyntaxHighlighter.ClipboardSwf = 'syntax/clipboard.swf';
+		dp.SyntaxHighlighter.HighlightAll('code');
+	</script>
+
+
+
+</body>
+</html>
