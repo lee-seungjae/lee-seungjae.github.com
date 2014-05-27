@@ -1,0 +1,11 @@
+﻿# NDC14 - 사례로 배우는 디스어셈블리 디버깅
+
+* 작성: 2014-05-27
+* 최종수정: 2014-05-27
+* 태그: NDC
+
+<TAG>
+<iframe src="http://www.slideshare.net/slideshow/embed_code/35166099" width="687" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+</TAG>
+
+2014년 5월 27일, 25분 세션.
