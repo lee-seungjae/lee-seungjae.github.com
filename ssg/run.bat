@@ -1,4 +1,4 @@
 @echo off
-source\debug\ssg
+source\release\ssg
 pause
 run
