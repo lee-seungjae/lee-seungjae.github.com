@@ -1,0 +1,9 @@
+﻿!제목 = NDC11 - 게임 애셋 스트리밍 패치
+!작성 = 2011-06-08
+!최종수정 = 2011-06-08
+
+<TAG>
+<iframe src="http://www.slideshare.net/slideshow/embed_code/8242296" width="687px" height="486px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/SeungjaeLee3/ndc2011-8242296" title="게임 애셋 스트리밍 패치" target="_blank">게임 애셋 스트리밍 패치</a> </strong> from <strong><a href="http://www.slideshare.net/SeungjaeLee3" target="_blank">Seungjae Lee</a></strong> </div>
+</TAG>
+
+2011년 6월 1일, 25분 세션.

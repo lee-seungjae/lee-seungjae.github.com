@@ -1,0 +1,39 @@
+﻿!제목 = NDC12 - 실시간 HTTP 양방향 통신
+!작성 = 2012-04-25
+!최종수정 = 2012-04-25
+
+<TAG>
+<iframe src="http://www.slideshare.net/slideshow/embed_code/12679447?rel=0" width="687" height="486" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="http://www.slideshare.net/devcatpublications/http-ndc2012" title="이승재, 실시간 HTTP 양방향 통신, NDC2012" target="_blank">이승재, 실시간 HTTP 양방향 통신, NDC2012</a> </strong> from <strong><a href="http://www.slideshare.net/devcatpublications" target="_blank">devCAT Studio, NEXON</a></strong> </div>
+</TAG>
+
+2012년 4월 25일, 50분 세션.
+
+
+## 참고문헌
+
+서버 푸시 개념 정리
+ * http://en.wikipedia.org/wiki/Push_technology
+
+Comet 기법 소개
+ * http://en.wikipedia.org/wiki/Comet_(programming)
+
+WebSocket 표준화, 브라우저 지원 현황
+ * http://en.wikipedia.org/wiki/WebSocket
+
+WebSocket과 Socket.io
+ * http://helloworld.naver.com/helloworld/1336
+
+HTTP Streaming(Hidden iframe)자세히 설명
+ * http://ajaxpatterns.org/HTTP_Streaming
+
+HTTP Streaming(Hidden iframe)의 문제점들
+ * http://www.quora.com/Why-would-HTTP-long-polling-be-used-instead-of-HTTP-Streaming-to-achieve-real-time-push-notifications
+
+GMail의 구현 설명
+ * http://www.ekhoury.com/blog/2007/02/07/ajax-alternatives-gmail-choice/
+ * http://stackoverflow.com/questions/2481696/how-does-gmail-implement-comet
+
+미들웨어 관련
+ * http://orbited.org/
+ * http://socket.io/
+
