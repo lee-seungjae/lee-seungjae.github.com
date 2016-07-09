@@ -10,11 +10,6 @@
 	<style>
 		body { font-family: "Malgun Gothic"; font-size:10pt; color:#404040; line-height:180%; letter-spacing: 0pt; padding:0; margin:0; }
 		.quote { font-size: 13pt; background-color:#f0f0f0; border:1px solid #e0e0e0; font-family: "Malgun Gothic"; padding: 10pt; }
-		h1 { font-size: 12pt; }
-		h2 { font-size: 14pt; }
-		h3 { font-size: 13pt; }
-		h4 { font-size: 12pt; }
-		p { padding: 0; margin: 0; }
 		.date_in_article {
 			font-size: 9pt;
 			color: gray;
@@ -46,7 +41,6 @@
 		.indent3 { margin-left: 30pt; }
 		.indent4 { margin-left: 40pt; }
 		.indent5 { margin-left: 50pt; }
-		hr { width: 90%; border:0; border-bottom:1px #a0a0a0 dotted }
 
 		.header {
 			font-size: 9pt;
@@ -69,9 +63,18 @@
 			margin-bottom:15pt;
 		}
 
+		p.compiled { padding:0; margin:0;}
+		hr.compiled { width: 100%; border:0; border-bottom:1px #d0d0d0 dashed; margin-top:10pt; margin-bottom:10pt; }
+		h1.compiled { font-size: 13pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		h2.compiled { font-size: 12pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		h3.compiled { font-size: 11pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		div.compiled_quote { font-family:Lucida Console,monospace; border:1px solid #d0d0d0; font-size:10pt; padding:5pt; color:#808080; background:#fbfbfb; }
+		div.compiled_emptyline { height: 15pt; }
+		li.compiled { margin-left: 15pt;}
+
 		@media (min-width:700px) {
 			.limit {
-				max-width:500pt;
+				max-width:600pt;
 				margin-left:auto;
 				margin-right:auto;
 			}
@@ -109,11 +112,11 @@
 		<div class='page'>
 			{% if #PAGES == 0 then %}
 				<font style='font-size:18pt;'>{{TITLE}}</font>
-				<div class='date_in_article'>
+				<div class='date_in_article' style='padding-left:3pt'>
 					{{FIRST_DATE}}
 				</div>
 				<div class='content'>
-					{{CONTENT}}
+					{*CONTENT*}
 				</div>
 				<div>
 					<a href='index.html' class='internal_link'>목록으로</a>
@@ -148,7 +151,7 @@
 					<font style='font-size:12pt;'>글</font>
 					<div style='margin-left:20pt; margin-top:5pt; margin-bottom:0pt;'>
 						{% for _, page in ipairs(PAGES) do
-							if page.TYPE == 'SLIDE' then %}
+							if page.TYPE ~= 'SLIDE' then %}
 							<div>
 								<a href='{{page.LINK}}' class='internal_link'>{{page.TITLE}}</a>
 									<span class='date_in_list'>{{page.DATE}}</span>
@@ -165,6 +168,7 @@
 				<span class='footer'>┃</span>
 				<a href='rss.xml' class='footer'>RSS</a>
 			</center>
+			<br>
 		</div>
 	</div>
 	<script class="javascript" src="syntax/shCore.js"></script> 

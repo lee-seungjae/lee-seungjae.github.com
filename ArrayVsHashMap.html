@@ -2,64 +2,35 @@
 <html>
 <head>
 	<title>
-		
-			Array(Vector) vs HashMap
-		
-	</title>
+		Array(Vector) vs HashMap	</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
 	<LINK rel='STYLESHEET' type='text/css' href='syntax/SyntaxHighlighter.css'>
 	<style>
-		body { font-family: "Malgun Gothic"; font-size:13pt; color:#000000; line-height:160%; letter-spacing: -1pt;
-}
+		body { font-family: "Malgun Gothic"; font-size:10pt; color:#404040; line-height:180%; letter-spacing: 0pt; padding:0; margin:0; }
 		.quote { font-size: 13pt; background-color:#f0f0f0; border:1px solid #e0e0e0; font-family: "Malgun Gothic"; padding: 10pt; }
-		h1 { font-size: 12pt; }
-		.bigh1 {
-			font-size: 18pt;
-		}
-		h2 { font-size: 14pt; }
-		h3 { font-size: 13pt; }
-		h4 { font-size: 12pt; }
-		p { padding: 0; margin: 0; }
-		.center {
-			max-width: 600pt;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		.title {
-			text-align: left;
-		}
-		.date {
-			font-size: 11pt;
+		.date_in_article {
+			font-size: 9pt;
 			color: gray;
-			margin-bottom: 40pt;
 		}
-		.text {
+		.date_in_list {
+			font-size: 8pt;
+			color: gray;
 		}
-		.page {
-			border-radius: 12pt;
-			background:#ffffff;
-			padding-top: 40pt;
-			padding-left: 40pt;
-			padding-right: 40pt;
-			padding-bottom: 40pt;
-			margin-bottom: 20pt;
-			-moz-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
-			-webkit-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
-			box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
-		}
-		.nav {
-			text-align: center;
+		.i {
 			color: #6699ff;
 		}
-		.internalLink {
+		a.internal_link {
 			color: #6699ff;
 		}
-		.externalLink {
+		a.internal_link:visited {
+			color: #446688;
+		}
+		a.external_link {
 			color: #008000;
 		}
-		.linkToTop {
-			color: black;
+		a.external_link:visited {
+			color: #004000;
 		}
 		.emptyLine {
 			height: 10pt;
@@ -69,49 +40,139 @@
 		.indent3 { margin-left: 30pt; }
 		.indent4 { margin-left: 40pt; }
 		.indent5 { margin-left: 50pt; }
-		hr { width: 90%; border:0; border-bottom:1px #aaaaaa dashed }
+
+		.header {
+			font-size: 9pt;
+			text-decoration: none;
+			color: #606060;
+		}
+
+		.footer {
+			font-size: 9pt;
+			text-decoration: none;
+			color: #606060;
+		}
+
+		.content {
+			border-top: 1px solid #d0d0d0;
+			border-bottom:1px solid #d0d0d0;
+			padding-top:15pt;
+			padding-bottom:15pt;
+			margin-top:15pt;
+			margin-bottom:15pt;
+		}
+
+		p.compiled { padding:0; margin:0;}
+		hr.compiled { width: 100%; border:0; border-bottom:1px #d0d0d0 dashed; margin-top:10pt; margin-bottom:10pt; }
+		h1.compiled { font-size: 13pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		h2.compiled { font-size: 12pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		h3.compiled { font-size: 11pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		div.compiled_quote { font-family:Lucida Console,monospace; border:1px solid #d0d0d0; font-size:10pt; padding:5pt; color:#808080; background:#fbfbfb; }
+		div.compiled_emptyline { height: 15pt; }
+		li.compiled { margin-left: 15pt;}
+
+		@media (min-width:700px) {
+			.limit {
+				max-width:600pt;
+				margin-left:auto;
+				margin-right:auto;
+			}
+
+			.page {
+				background:#ffffff;
+				padding-top: 20pt;
+				padding-left: 20pt;
+				padding-right: 20pt;
+				padding-bottom: 20pt;
+				margin-bottom: 10pt;
+				border: 1px solid #d0d0d0;
+			}
+		}
+
+		@media (max-width:699px) {
+			.page {
+				background:#ffffff;
+				padding-left: 5pt;
+				padding-right: 5pt;
+				padding-top: 20pt;
+				padding-bottom: 20pt;
+				margin-bottom: 10pt;
+				border: 1px solid #d0d0d0;
+			}
+		}
 	</style>
 </head>
 
-<body bgcolor="#444444" style='margin:30pt'>
-
-	<div class=center>
-		<div class=page>
-			<div class=title>
-				<h1>
-					<a href='index.html' class=linkToTop>lee-seungjae.github.com</a>
-					<a href='rss.xml'><img src='feed16.gif'></a>
-					<br>
-					<font class=bigh1>Array(Vector) vs HashMap</font>
-				</h1>
-			</div>
-			<div class=date>
-				2012-06-21
-			</div>
-			<div class=text>
-				<p>삽입/삭제 패턴이 어떻게 되나?</p>
-<p>조회 패턴이 어떻게 되나?</p>
-<p>얼마나 많은 원소를 담아야 하나?</p>
-<p>얼마나 많은 메모리 오버헤드를 감수할 수 있나?</p>
-<p>담을 원소의 크기는 얼마나 큰가?</p>
-<p>복사 비용이 얼마나 비싼가?</p>
-<p>해쉬 계산 함수의 비용이 얼마나 비싼가?</p>
-<p>동등성 확인 비용이 얼마나 비싼가?</p>
-<p>해쉬맵 구현체의 내부가 어떻게 생겼나?</p>
-<p class='emptyLine'></p>
-<p class='emptyLine'></p>
-<p>그리고,</p>
-<p class='emptyLine'></p>
-<p>이런 고민을 해야 할 정도로 성능이 중요한 프로그램인가?</p>
-<p>이런 고민을 해야 할 정도로 성능이 중요한 부분인가?</p>
-<p class='emptyLine'></p>
-<p class='emptyLine'></p>
-<p>답보다 질문이 중요하다.</p>
-
-			</div>
+<body bgcolor="#e0e0e0">
+	<div class='limit'>
+		<div style='margin:10pt; text-align: center;'>
+			<a href='/' class='footer'>lee-seungjae.github.io</a>
 		</div>
-		<div class=nav>
-			<a href='index.html' class=nav>목록으로</a>
+		<div class='page'>
+							<font style='font-size:18pt;'>Array(Vector) vs HashMap</font>
+				<div class='date_in_article' style='padding-left:3pt'>
+					2012-06-21				</div>
+				<div class='content'>
+					<p class="compiled">
+삽입/삭제 패턴이 어떻게 되나?
+</p>
+<p class="compiled">
+조회 패턴이 어떻게 되나?
+</p>
+<p class="compiled">
+얼마나 많은 원소를 담아야 하나?
+</p>
+<p class="compiled">
+얼마나 많은 메모리 오버헤드를 감수할 수 있나?
+</p>
+<p class="compiled">
+담을 원소의 크기는 얼마나 큰가?
+</p>
+<p class="compiled">
+복사 비용이 얼마나 비싼가?
+</p>
+<p class="compiled">
+해쉬 계산 함수의 비용이 얼마나 비싼가?
+</p>
+<p class="compiled">
+동등성 확인 비용이 얼마나 비싼가?
+</p>
+<p class="compiled">
+해쉬맵 구현체의 내부가 어떻게 생겼나?
+</p>
+<div class="compiled_emptyline">
+</div>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+그리고,
+</p>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+이런 고민을 해야 할 정도로 성능이 중요한 프로그램인가?
+</p>
+<p class="compiled">
+이런 고민을 해야 할 정도로 성능이 중요한 부분인가?
+</p>
+<div class="compiled_emptyline">
+</div>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+답보다 질문이 중요하다.
+</p>				</div>
+				<div>
+					<a href='index.html' class='internal_link'>목록으로</a>
+				</div>
+					</div>
+		<div>
+			<center>
+				<a href='http://twitter.com/0xcafea1fa' class='footer'>@0xcafea1fa</a>
+				<span class='footer'>┃</span>
+				<a href='rss.xml' class='footer'>RSS</a>
+			</center>
+			<br>
 		</div>
 	</div>
 	<script class="javascript" src="syntax/shCore.js"></script> 
@@ -131,8 +192,5 @@
 		dp.SyntaxHighlighter.ClipboardSwf = 'syntax/clipboard.swf';
 		dp.SyntaxHighlighter.HighlightAll('code');
 	</script>
-
-
-
 </body>
 </html>

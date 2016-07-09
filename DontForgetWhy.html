@@ -2,64 +2,35 @@
 <html>
 <head>
 	<title>
-		
-			결정을 기록할 때는
-		
-	</title>
+		결정을 기록할 때는	</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
 	<LINK rel='STYLESHEET' type='text/css' href='syntax/SyntaxHighlighter.css'>
 	<style>
-		body { font-family: "Malgun Gothic"; font-size:13pt; color:#000000; line-height:160%; letter-spacing: -1pt;
-}
+		body { font-family: "Malgun Gothic"; font-size:10pt; color:#404040; line-height:180%; letter-spacing: 0pt; padding:0; margin:0; }
 		.quote { font-size: 13pt; background-color:#f0f0f0; border:1px solid #e0e0e0; font-family: "Malgun Gothic"; padding: 10pt; }
-		h1 { font-size: 12pt; }
-		.bigh1 {
-			font-size: 18pt;
-		}
-		h2 { font-size: 14pt; }
-		h3 { font-size: 13pt; }
-		h4 { font-size: 12pt; }
-		p { padding: 0; margin: 0; }
-		.center {
-			max-width: 600pt;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		.title {
-			text-align: left;
-		}
-		.date {
-			font-size: 11pt;
+		.date_in_article {
+			font-size: 9pt;
 			color: gray;
-			margin-bottom: 40pt;
 		}
-		.text {
+		.date_in_list {
+			font-size: 8pt;
+			color: gray;
 		}
-		.page {
-			border-radius: 12pt;
-			background:#ffffff;
-			padding-top: 40pt;
-			padding-left: 40pt;
-			padding-right: 40pt;
-			padding-bottom: 40pt;
-			margin-bottom: 20pt;
-			-moz-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
-			-webkit-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
-			box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
-		}
-		.nav {
-			text-align: center;
+		.i {
 			color: #6699ff;
 		}
-		.internalLink {
+		a.internal_link {
 			color: #6699ff;
 		}
-		.externalLink {
+		a.internal_link:visited {
+			color: #446688;
+		}
+		a.external_link {
 			color: #008000;
 		}
-		.linkToTop {
-			color: black;
+		a.external_link:visited {
+			color: #004000;
 		}
 		.emptyLine {
 			height: 10pt;
@@ -69,44 +40,125 @@
 		.indent3 { margin-left: 30pt; }
 		.indent4 { margin-left: 40pt; }
 		.indent5 { margin-left: 50pt; }
-		hr { width: 90%; border:0; border-bottom:1px #aaaaaa dashed }
+
+		.header {
+			font-size: 9pt;
+			text-decoration: none;
+			color: #606060;
+		}
+
+		.footer {
+			font-size: 9pt;
+			text-decoration: none;
+			color: #606060;
+		}
+
+		.content {
+			border-top: 1px solid #d0d0d0;
+			border-bottom:1px solid #d0d0d0;
+			padding-top:15pt;
+			padding-bottom:15pt;
+			margin-top:15pt;
+			margin-bottom:15pt;
+		}
+
+		p.compiled { padding:0; margin:0;}
+		hr.compiled { width: 100%; border:0; border-bottom:1px #d0d0d0 dashed; margin-top:10pt; margin-bottom:10pt; }
+		h1.compiled { font-size: 13pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		h2.compiled { font-size: 12pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		h3.compiled { font-size: 11pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		div.compiled_quote { font-family:Lucida Console,monospace; border:1px solid #d0d0d0; font-size:10pt; padding:5pt; color:#808080; background:#fbfbfb; }
+		div.compiled_emptyline { height: 15pt; }
+		li.compiled { margin-left: 15pt;}
+
+		@media (min-width:700px) {
+			.limit {
+				max-width:600pt;
+				margin-left:auto;
+				margin-right:auto;
+			}
+
+			.page {
+				background:#ffffff;
+				padding-top: 20pt;
+				padding-left: 20pt;
+				padding-right: 20pt;
+				padding-bottom: 20pt;
+				margin-bottom: 10pt;
+				border: 1px solid #d0d0d0;
+			}
+		}
+
+		@media (max-width:699px) {
+			.page {
+				background:#ffffff;
+				padding-left: 5pt;
+				padding-right: 5pt;
+				padding-top: 20pt;
+				padding-bottom: 20pt;
+				margin-bottom: 10pt;
+				border: 1px solid #d0d0d0;
+			}
+		}
 	</style>
 </head>
 
-<body bgcolor="#444444" style='margin:30pt'>
-
-	<div class=center>
-		<div class=page>
-			<div class=title>
-				<h1>
-					<a href='index.html' class=linkToTop>lee-seungjae.github.com</a>
-					<a href='rss.xml'><img src='feed16.gif'></a>
-					<br>
-					<font class=bigh1>결정을 기록할 때는</font>
-				</h1>
-			</div>
-			<div class=date>
-				2010-03-16
-			</div>
-			<div class=text>
-				<p>왜, 를 반드시 쓰라.</p>
-<p class='emptyLine'></p>
-<p>결정의 이유를 기록해 두지 않으면 몇 개월이나 몇 년이 지나서 과거의 결정이 불합리해 보일 때, 그 결정이:</p>
-<p class='emptyLine'></p>
-<li>지금은 유효하지 않은 어떤 전제 하에 내려진 것인지 (번복하면 됨)</li>
-<li>지금은 기억나지 않지만 여전히 문제가 되는 미묘한 사항 때문인지 (아하 그랬구나 하고 넘어가면 됨)</li>
-<li>충분한 정보를 모으지 못해서 일단 임시방편으로 내린 결정인지 (이제 결정하거나 다시 미루면 됨)</li>
-<li>당시 피할 수 없는 조건 때문에 내려졌던 것인지 (레거시입니다 존중해주시죠?)</li>
-<li>지금 생각난 빠꼼한 해결책이 당시에는 떠오르지 않았던 것 뿐인지 (우쭐하면 됨)</li>
-<p class='emptyLine'></p>
-<p>알 수가 없다.</p>
-<p class='emptyLine'></p>
-<p>암흑으로 가득찬 광대한 해공간을 탐색하는 당신들, 안 그래도 갈 길이 먼데 자신들이 서있는 위치가 어디인지, 왜 여기 서있는지는 알고 있어야 되지 않겠나.</p>
-
-			</div>
+<body bgcolor="#e0e0e0">
+	<div class='limit'>
+		<div style='margin:10pt; text-align: center;'>
+			<a href='/' class='footer'>lee-seungjae.github.io</a>
 		</div>
-		<div class=nav>
-			<a href='index.html' class=nav>목록으로</a>
+		<div class='page'>
+							<font style='font-size:18pt;'>결정을 기록할 때는</font>
+				<div class='date_in_article' style='padding-left:3pt'>
+					2010-03-16				</div>
+				<div class='content'>
+					<p class="compiled">
+왜, 를 반드시 쓰라.
+</p>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+결정의 이유를 기록해 두지 않으면 몇 개월이나 몇 년이 지나서 과거의 결정이 불합리해 보일 때, 그 결정이:
+</p>
+<div class="compiled_emptyline">
+</div>
+<li class="compiled">
+지금은 유효하지 않은 어떤 전제 하에 내려진 것인지 (번복하면 됨)
+</li>
+<li class="compiled">
+지금은 기억나지 않지만 여전히 문제가 되는 미묘한 사항 때문인지 (아하 그랬구나 하고 넘어가면 됨)
+</li>
+<li class="compiled">
+충분한 정보를 모으지 못해서 일단 임시방편으로 내린 결정인지 (이제 결정하거나 다시 미루면 됨)
+</li>
+<li class="compiled">
+당시 피할 수 없는 조건 때문에 내려졌던 것인지 (레거시입니다 존중해주시죠?)
+</li>
+<li class="compiled">
+지금 생각난 빠꼼한 해결책이 당시에는 떠오르지 않았던 것 뿐인지 (우쭐하면 됨)
+</li>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+알 수가 없다.
+</p>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+안 그래도 갈 길이 먼데 우리가 어디에 있는지, 왜 여기 있는지는 알고 있어야 되지 않겠나.
+</p>				</div>
+				<div>
+					<a href='index.html' class='internal_link'>목록으로</a>
+				</div>
+					</div>
+		<div>
+			<center>
+				<a href='http://twitter.com/0xcafea1fa' class='footer'>@0xcafea1fa</a>
+				<span class='footer'>┃</span>
+				<a href='rss.xml' class='footer'>RSS</a>
+			</center>
+			<br>
 		</div>
 	</div>
 	<script class="javascript" src="syntax/shCore.js"></script> 
@@ -126,8 +178,5 @@
 		dp.SyntaxHighlighter.ClipboardSwf = 'syntax/clipboard.swf';
 		dp.SyntaxHighlighter.HighlightAll('code');
 	</script>
-
-
-
 </body>
 </html>

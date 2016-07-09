@@ -2,64 +2,35 @@
 <html>
 <head>
 	<title>
-		
-			lee-seungjae.github.com
-		
-	</title>
+			</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
 	<LINK rel='STYLESHEET' type='text/css' href='syntax/SyntaxHighlighter.css'>
 	<style>
-		body { font-family: "Malgun Gothic"; font-size:13pt; color:#000000; line-height:160%; letter-spacing: -1pt;
-}
+		body { font-family: "Malgun Gothic"; font-size:10pt; color:#404040; line-height:180%; letter-spacing: 0pt; padding:0; margin:0; }
 		.quote { font-size: 13pt; background-color:#f0f0f0; border:1px solid #e0e0e0; font-family: "Malgun Gothic"; padding: 10pt; }
-		h1 { font-size: 12pt; }
-		.bigh1 {
-			font-size: 18pt;
-		}
-		h2 { font-size: 14pt; }
-		h3 { font-size: 13pt; }
-		h4 { font-size: 12pt; }
-		p { padding: 0; margin: 0; }
-		.center {
-			max-width: 600pt;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		.title {
-			text-align: left;
-		}
-		.date {
-			font-size: 11pt;
+		.date_in_article {
+			font-size: 9pt;
 			color: gray;
-			margin-bottom: 40pt;
 		}
-		.text {
+		.date_in_list {
+			font-size: 8pt;
+			color: gray;
 		}
-		.page {
-			border-radius: 12pt;
-			background:#ffffff;
-			padding-top: 40pt;
-			padding-left: 40pt;
-			padding-right: 40pt;
-			padding-bottom: 40pt;
-			margin-bottom: 20pt;
-			-moz-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
-			-webkit-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
-			box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
-		}
-		.nav {
-			text-align: center;
+		.i {
 			color: #6699ff;
 		}
-		.internalLink {
+		a.internal_link {
 			color: #6699ff;
 		}
-		.externalLink {
+		a.internal_link:visited {
+			color: #446688;
+		}
+		a.external_link {
 			color: #008000;
 		}
-		.linkToTop {
-			color: black;
+		a.external_link:visited {
+			color: #004000;
 		}
 		.emptyLine {
 			height: 10pt;
@@ -69,108 +40,215 @@
 		.indent3 { margin-left: 30pt; }
 		.indent4 { margin-left: 40pt; }
 		.indent5 { margin-left: 50pt; }
-		hr { width: 90%; border:0; border-bottom:1px #aaaaaa dashed }
+
+		.header {
+			font-size: 9pt;
+			text-decoration: none;
+			color: #606060;
+		}
+
+		.footer {
+			font-size: 9pt;
+			text-decoration: none;
+			color: #606060;
+		}
+
+		.content {
+			border-top: 1px solid #d0d0d0;
+			border-bottom:1px solid #d0d0d0;
+			padding-top:15pt;
+			padding-bottom:15pt;
+			margin-top:15pt;
+			margin-bottom:15pt;
+		}
+
+		p.compiled { padding:0; margin:0;}
+		hr.compiled { width: 100%; border:0; border-bottom:1px #d0d0d0 dashed; margin-top:10pt; margin-bottom:10pt; }
+		h1.compiled { font-size: 13pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		h2.compiled { font-size: 12pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		h3.compiled { font-size: 11pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		div.compiled_quote { font-family:Lucida Console,monospace; border:1px solid #d0d0d0; font-size:10pt; padding:5pt; color:#808080; background:#fbfbfb; }
+		div.compiled_emptyline { height: 15pt; }
+		li.compiled { margin-left: 15pt;}
+
+		@media (min-width:700px) {
+			.limit {
+				max-width:600pt;
+				margin-left:auto;
+				margin-right:auto;
+			}
+
+			.page {
+				background:#ffffff;
+				padding-top: 20pt;
+				padding-left: 20pt;
+				padding-right: 20pt;
+				padding-bottom: 20pt;
+				margin-bottom: 10pt;
+				border: 1px solid #d0d0d0;
+			}
+		}
+
+		@media (max-width:699px) {
+			.page {
+				background:#ffffff;
+				padding-left: 5pt;
+				padding-right: 5pt;
+				padding-top: 20pt;
+				padding-bottom: 20pt;
+				margin-bottom: 10pt;
+				border: 1px solid #d0d0d0;
+			}
+		}
 	</style>
 </head>
 
-<body bgcolor="#444444" style='margin:30pt'>
-
-
-
-	<div class=center>
-		<div class=page>
-			<div class=title>
-				<h1>
-					<a href='index.html' class=linkToTop>lee-seungjae.github.com</a>
-					<a href='rss.xml'><img src='feed16.gif'></a>
-					<br>
-				</h1>
-			</div>
-			<div class=date>
-			</div>
-			<div class=text>
-			
-				<li><a href='Interview.html' class=internalLink>인터뷰</a>
-					<span class=date>2016-04-26</span></li>
-			
-				<li><a href='DisassemblyDebugging.html' class=internalLink>NDC14 - 사례로 배우는 디스어셈블리 디버깅</a>
-					<span class=date>2014-05-27</span></li>
-			
-				<li><a href='ThroughputAndUtilization.html' class=internalLink>처리량과 활용</a>
-					<span class=date>2014-03-30</span></li>
-			
-				<li><a href='CodeHotloadingAndInHouseScriptLanguage.html' class=internalLink>NDC13 - M2 AI코드 개발 생산성 향상 사례</a>
-					<span class=date>2013-04-28</span></li>
-			
-				<li><a href='ArrayVsHashMap.html' class=internalLink>Array(Vector) vs HashMap</a>
-					<span class=date>2012-06-21</span></li>
-			
-				<li><a href='BidirectionalHTTP.html' class=internalLink>NDC12 - 실시간 HTTP 양방향 통신</a>
-					<span class=date>2012-04-25</span></li>
-			
-				<li><a href='ScriptingLanguageConsideration.html' class=internalLink>게임에 사용할 스크립팅 환경을 고를 때 고려해야 할 것들</a>
-					<span class=date>2011-11-20</span></li>
-			
-				<li><a href='greenlet.html' class=internalLink>greenlet은 어떻게 구현했을까?</a>
-					<span class=date>2011-10-07</span></li>
-			
-				<li><a href='WebServerArchitecture.html' class=internalLink>웹서버 아키텍처와 프로그래밍 모델의 진화</a>
-					<span class=date>2011-09-03</span></li>
-			
-				<li><a href='TellMeTheContext.html' class=internalLink>뭘 하고 싶은가? 맥락을 말해보라.</a>
-					<span class=date>2011-07-26</span></li>
-			
-				<li><a href='LuaErrorHandling.html' class=internalLink>루아 에러 핸들링</a>
-					<span class=date>2011-06-10</span></li>
-			
-				<li><a href='BuildingOnlineGameEntirelyWithDynamicLanguage.html' class=internalLink>NDC11 - 온라인 게임 처음부터 끝까지 동적언어로 만들기</a>
-					<span class=date>2011-06-08</span></li>
-			
-				<li><a href='GameAssetStreamingPatch.html' class=internalLink>NDC11 - 게임 애셋 스트리밍 패치</a>
-					<span class=date>2011-06-08</span></li>
-			
-				<li><a href='AutoDrivingDameda.html' class=internalLink>자동 운전 안될거야 아마</a>
-					<span class=date>2010-10-21</span></li>
-			
-				<li><a href='ProgrammingLanguagesInKVTN.html' class=internalLink>모 MMORPG에서 쓴 언어들</a>
-					<span class=date>2010-08-12</span></li>
-			
-				<li><a href='AvoidingDeadlocks.html' class=internalLink>데드락 피하기</a>
-					<span class=date>2010-03-18</span></li>
-			
-				<li><a href='DontForgetWhy.html' class=internalLink>결정을 기록할 때는</a>
-					<span class=date>2010-03-16</span></li>
-			
-				<li><a href='TheWhyWordInKoreanConversation.html' class=internalLink>한국어 회화에서</a>
-					<span class=date>2010-03-15</span></li>
-			
-				<li><a href='InhouseTool2.html' class=internalLink>인하우스 툴 만들기 2</a>
-					<span class=date>2010-03-04</span></li>
-			
-				<li><a href='InhouseTool1.html' class=internalLink>인하우스 툴 만들기</a>
-					<span class=date>2010-02-23</span></li>
-			
-				<li><a href='ProgrammingAsEngineering.html' class=internalLink>엔지니어링으로서의 컴퓨터프로그래밍</a>
-					<span class=date>2006-04-23</span></li>
-			
-				<li><a href='DesignPatternConsideredHarmful.html' class=internalLink>디자인패턴과 주화입마</a>
-					<span class=date>2006-04-21</span></li>
-			
-				<li><a href='PuttingAnElephantIntoARefrigeratorWithComputerScience.html' class=internalLink>전산학에서 코끼리를 냉장고에 넣는 방법들</a>
-					<span class=date>2006-04-21</span></li>
-			
-				<li><a href='Synchronized2.html' class=internalLink>improved synchronized block in C++</a>
-					<span class=date>2005-08-11</span></li>
-			
-				<li><a href='Synchronized1.html' class=internalLink>synchronized block in C++</a>
-					<span class=date>2005-08-07</span></li>
-			
-			</div>
+<body bgcolor="#e0e0e0">
+	<div class='limit'>
+		<div style='margin:10pt; text-align: center;'>
+			<a href='/' class='footer'>lee-seungjae.github.io</a>
 		</div>
-		<div class=nav>
-			<a href='http://twitter.com/0xcafea1fa' class=nav>@0xcafea1fa</a>
+		<div class='page'>
+							<div>
+					<font style='font-size:12pt;'>소개</font>
+					<div style='margin-left:20pt; margin-top:5pt; margin-bottom:20pt;'>
+						이승재<br>
+						게임 개발자, 소프트웨어 엔지니어<br>
+						devCAT Studio/NEXON<br>
+						마비노기 듀얼<br>
+						마비노기 2: 아레나<br>
+						데스크탑 히어로즈<br>
+						카바티나 스토리<br>
+					</div>
+				</div>
+				<div>
+					<font style='font-size:12pt;'>슬라이드</font>
+					<div style='margin-left:20pt; margin-top:5pt; margin-bottom:20pt;'>
+														<div>
+									<a href='DisassemblyDebugging.html' class='internal_link'>NDC14 - 사례로 배우는 디스어셈블리 디버깅</a>
+										<span class='date_in_list'>2014-05-27</span>
+								</div>
+															<div>
+									<a href='CodeHotloadingAndInHouseScriptLanguage.html' class='internal_link'>NDC13 - M2 AI코드 개발 생산성 향상 사례</a>
+										<span class='date_in_list'>2013-04-28</span>
+								</div>
+															<div>
+									<a href='BidirectionalHTTP.html' class='internal_link'>NDC12 - 실시간 HTTP 양방향 통신</a>
+										<span class='date_in_list'>2012-04-25</span>
+								</div>
+															<div>
+									<a href='BuildingOnlineGameEntirelyWithDynamicLanguage.html' class='internal_link'>NDC11 - 온라인 게임 처음부터 끝까지 동적언어로 만들기</a>
+										<span class='date_in_list'>2011-06-08</span>
+								</div>
+															<div>
+									<a href='GameAssetStreamingPatch.html' class='internal_link'>NDC11 - 게임 애셋 스트리밍 패치</a>
+										<span class='date_in_list'>2011-06-08</span>
+								</div>
+												</div>
+				</div>
+				<div>
+					<font style='font-size:12pt;'>글</font>
+					<div style='margin-left:20pt; margin-top:5pt; margin-bottom:0pt;'>
+													<div>
+								<a href='Interview.html' class='internal_link'>인터뷰</a>
+									<span class='date_in_list'>2016-04-26</span>
+							</div>
+														<div>
+								<a href='ThroughputAndUtilization.html' class='internal_link'>처리량과 활용</a>
+									<span class='date_in_list'>2014-03-30</span>
+							</div>
+														<div>
+								<a href='ArrayVsHashMap.html' class='internal_link'>Array(Vector) vs HashMap</a>
+									<span class='date_in_list'>2012-06-21</span>
+							</div>
+														<div>
+								<a href='ScriptingLanguageConsideration.html' class='internal_link'>게임에 사용할 스크립팅 환경을 고를 때 고려해야 할 것들</a>
+									<span class='date_in_list'>2011-11-20</span>
+							</div>
+														<div>
+								<a href='greenlet.html' class='internal_link'>greenlet은 어떻게 구현했을까?</a>
+									<span class='date_in_list'>2011-10-07</span>
+							</div>
+														<div>
+								<a href='WebServerArchitecture.html' class='internal_link'>웹서버 아키텍처와 프로그래밍 모델의 진화</a>
+									<span class='date_in_list'>2011-09-03</span>
+							</div>
+														<div>
+								<a href='TellMeTheContext.html' class='internal_link'>뭘 하고 싶은가? 맥락을 말해보라.</a>
+									<span class='date_in_list'>2011-07-26</span>
+							</div>
+														<div>
+								<a href='LuaErrorHandling.html' class='internal_link'>루아 에러 핸들링</a>
+									<span class='date_in_list'>2011-06-10</span>
+							</div>
+														<div>
+								<a href='AutoDrivingDameda.html' class='internal_link'>자동 운전 안될거야 아마</a>
+									<span class='date_in_list'>2010-10-21</span>
+							</div>
+														<div>
+								<a href='ProgrammingLanguagesInKVTN.html' class='internal_link'>모 MMORPG에서 쓴 언어들</a>
+									<span class='date_in_list'>2010-08-12</span>
+							</div>
+														<div>
+								<a href='AvoidingDeadlocks.html' class='internal_link'>데드락 피하기</a>
+									<span class='date_in_list'>2010-03-18</span>
+							</div>
+														<div>
+								<a href='DontForgetWhy.html' class='internal_link'>결정을 기록할 때는</a>
+									<span class='date_in_list'>2010-03-16</span>
+							</div>
+														<div>
+								<a href='TheWhyWordInKoreanConversation.html' class='internal_link'>한국어 회화에서</a>
+									<span class='date_in_list'>2010-03-15</span>
+							</div>
+														<div>
+								<a href='InhouseTool2.html' class='internal_link'>인하우스 툴 만들기 2</a>
+									<span class='date_in_list'>2010-03-04</span>
+							</div>
+														<div>
+								<a href='InhouseTool1.html' class='internal_link'>인하우스 툴 만들기</a>
+									<span class='date_in_list'>2010-02-23</span>
+							</div>
+														<div>
+								<a href='ProgrammingAsEngineering.html' class='internal_link'>엔지니어링으로서의 컴퓨터프로그래밍</a>
+									<span class='date_in_list'>2006-04-23</span>
+							</div>
+														<div>
+								<a href='DesignPatternConsideredHarmful.html' class='internal_link'>디자인패턴과 주화입마</a>
+									<span class='date_in_list'>2006-04-21</span>
+							</div>
+														<div>
+								<a href='PuttingAnElephantIntoARefrigeratorWithComputerScience.html' class='internal_link'>전산학에서 코끼리를 냉장고에 넣는 방법들</a>
+									<span class='date_in_list'>2006-04-21</span>
+							</div>
+												</div>
+				</div>
+					</div>
+		<div>
+			<center>
+				<a href='http://twitter.com/0xcafea1fa' class='footer'>@0xcafea1fa</a>
+				<span class='footer'>┃</span>
+				<a href='rss.xml' class='footer'>RSS</a>
+			</center>
+			<br>
 		</div>
 	</div>
-
+	<script class="javascript" src="syntax/shCore.js"></script> 
+	<script class="javascript" src="syntax/shBrushCSharp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCpp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCss.js"></script> 
+	<script class="javascript" src="syntax/shBrushDelphi.js"></script> 
+	<script class="javascript" src="syntax/shBrushJScript.js"></script> 
+	<script class="javascript" src="syntax/shBrushJava.js"></script> 
+	<script class="javascript" src="syntax/shBrushPhp.js"></script> 
+	<script class="javascript" src="syntax/shBrushPython.js"></script> 
+	<script class="javascript" src="syntax/shBrushRuby.js"></script> 
+	<script class="javascript" src="syntax/shBrushSql.js"></script> 
+	<script class="javascript" src="syntax/shBrushVb.js"></script> 
+	<script class="javascript" src="syntax/shBrushXml.js"></script> 
+	<script class="javascript"> 
+		dp.SyntaxHighlighter.ClipboardSwf = 'syntax/clipboard.swf';
+		dp.SyntaxHighlighter.HighlightAll('code');
+	</script>
 </body>
 </html>

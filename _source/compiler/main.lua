@@ -42,12 +42,17 @@ local function preprocess(source) --> { meta = Dictionary<string, string>, lines
 		table.remove(arr, 1)
 	end
 
+	-- 마지막 빈줄들도 쳐낸다.
+	while arr[#arr]:trim() == '' do
+		arr[#arr] = nil
+	end
+
 	return { meta = meta, lines = arr }
 end
 
 -------------------------------------------------------------------------------
 local function compile_and_write(template, preprocessed_sources, doc_id, pp)
-	print(doc_id, type(pp.lines))
+	print('컴파일 중: ' .. doc_id)
 
 	local function check_meta(key)
 		if not pp.meta[key] then
@@ -58,31 +63,198 @@ local function compile_and_write(template, preprocessed_sources, doc_id, pp)
 	check_meta('작성')
 	check_meta('최종수정')
 
-	local compiled_text = '컴파일된 텍스트'
+	local compiled_lines = {}
 
+	local current_line = 1
+	local function peek_line()
+		return pp.lines[current_line]
+	end
+
+	local function next_line()
+		local rv = peek_line()
+		current_line = current_line + 1
+		return rv
+	end
+
+	local function escape(ln)
+		local function link_external_with_caption(s, pos)
+			s = s:sub(2, #s - 1)
+			local delim = s:find(':')
+			local caption = s:sub(1, delim - 1)
+			local href = s:sub(delim + 1)
+			return string.format('<a href="%s" class="external_link">%s</a>', href, caption)
+		end
+		local function link_external_without_caption(s)
+			local prefix = ''
+			if s:starts_with(' ') then
+				prefix = ' '
+				s = s:sub(2)
+			end
+			return prefix .. string.format('<a href="%s" class="external_link">%s</a>', s, s)
+		end
+		local function link_internal_with_caption(s)
+			s = s:sub(2, #s - 1)
+			local delim = s:find(':')
+			local caption = s:sub(1, delim - 1)
+			local href = s:sub(delim + 1)
+			local x = preprocessed_sources[href]
+			if not x then
+				error('문서를 찾을 수 없습니다: ' .. s .. ' in ' .. doc_id)
+			end
+			return string.format('<a href="%s.html" class="internal_link">%s</a>', href, caption)
+		end
+		local function link_internal_without_caption(s)
+			s = s:sub(2, #s - 1)
+			local x = preprocessed_sources[s]
+			if not x then
+				error('문서를 찾을 수 없습니다: ' .. s .. ' in ' .. doc_id)
+			end
+			return string.format('<a href="%s.html" class="internal_link">%s</a>', s, x.meta['제목'])
+		end
+
+		local rv = ln
+			:gsub('%<', '&lt;')
+			:gsub('%>', '&gt;')
+ 			:gsub('%[[^%:]*%:https?%:%/%/[^%]]*%]', link_external_with_caption)
+			:gsub('%[[^%:]*%:[^%]]*%]', link_internal_with_caption)
+			:gsub('%[[^%]]*%]', link_internal_without_caption)
+			:gsub('^https?%:%/%/[^%) ]*', link_external_without_caption)
+			:gsub(' https?%:%/%/[^%) ]*', link_external_without_caption)
+		return rv
+	end
+
+	local function escape_tag_only(ln)
+		local rv = ln
+			:gsub('%<', '&lt;')
+			:gsub('%>', '&gt;')
+		return rv
+	end
+
+	local function next_paragraph()
+		local ln = next_line()
+
+		-- 종료.
+		if ln == nil then
+			return
+		end
+
+		-- 한 라인짜리.
+		if ln:match("^%-%-%-%-%-+$") then
+			return { '<hr class="compiled">' }
+		end
+		if ln:starts_with('#') then
+			for i = 3, 1, -1 do
+				if ln:starts_with(string.rep('#', i)) then
+					return { ln:sub(i + 1) }, '<h' .. i .. ' class="compiled">', '</h' .. i .. '>'
+				end
+			end
+		end
+		if ln == '' then
+			return {}, '<div class="compiled_emptyline">', '</div>'
+		end
+
+		-- 블럭 처리.
+		if ln == '{{{' then
+			local pbody = {}
+			while true do
+				local ln = next_line()
+				if (ln == nil) or (ln == '}}}') then
+					break;
+				end
+				table.insert(pbody, escape_tag_only(ln) .. '<br>')
+			end
+			return pbody, '<div class="compiled_quote">', '</div>'
+		end
+		if ln == '<TAG>' then
+			local pbody = {}
+			while true do
+				local ln = next_line()
+				if (ln == nil) or (ln == '</TAG>') then
+					break;
+				end
+				table.insert(pbody, ln .. '<br>')
+			end
+			return pbody, '<div>', '</div>'
+		end
+		if ln:lower():starts_with('<code:') then
+			local lang = ln:sub(7, #ln - 1)
+			local pbody = { '<pre name="code" class="' .. lang .. '">' }
+			while true do
+				local ln = next_line()
+				if (ln == nil) or (ln:lower() == '</code>') then
+					break;
+				end
+				table.insert(pbody, ln)
+			end
+			table.insert(pbody, '</pre>')
+			return pbody
+		end
+		if ln:starts_with(' * ') then
+			local pbody = { escape(ln:sub(4)) }
+			while true do
+				local ln = peek_line()
+				if (ln == nil) or (ln == '') then
+					break
+				end
+				if ln:starts_with(' * ') then
+					break
+				end
+				next_line()
+				table.insert(pbody, '<br>' .. escape(ln))
+			end
+			return pbody, '<li class="compiled">', '</li>'
+		end
+
+		local pbody = {}
+		table.insert(pbody, escape(ln))
+		return pbody, '<p class="compiled">', '</p>'
+	end
+
+	while true do
+		local pbody, ph, pf = next_paragraph()
+		if pbody == nil then break end
+		
+		if ph then table.insert(compiled_lines, ph) end
+		for _, ln in ipairs(pbody) do
+			table.insert(compiled_lines, ln)
+		end
+		if pf then table.insert(compiled_lines, pf) end
+	end
+	
 	local c = {
 		TITLE = pp.meta['제목'],
-		CONTENT = compiled_text,
-		FIRST_DATE = '퍼스트_데이트',
+		CONTENT = table.concat(compiled_lines, '\n'),
+		FIRST_DATE = pp.meta['작성'],
 		PAGES = {},
 	}
-
 	io_ext.write_text_file('..\\' .. doc_id .. '.html', template(c))
 end
 
 -------------------------------------------------------------------------------
 local function write_index(template, preprocessed_sources)
+	print('인덱스 쓰는 중')
+
 	local c = {
 		TITLE = '',
 		CONTENT = '',
-		PAGES = {
-			{ LINK='link', TITLE='title', DATE='date', TYPE='SLIDE' },
-			{ LINK='link', TITLE='title', DATE='date', TYPE='SLIDE' },
-			{ LINK='link', TITLE='title', DATE='date', TYPE='' },
-			{ LINK='link', TITLE='title', DATE='date', TYPE='' },
-			{ LINK='link', TITLE='title', DATE='date', TYPE='' },
-		}
-	}	
+		PAGES = {}
+	}
+
+	for k, v in pairs(preprocessed_sources) do
+		table.insert(c.PAGES, {
+			LINK = k .. '.html',
+			TITLE = v.meta['제목'],
+			DATE = v.meta['작성'],
+			TYPE = v.meta['타입']
+		});
+	end
+
+	table.sort(
+		c.PAGES,
+		function(a, b)
+			return a.DATE > b.DATE
+		end)
+
 	io_ext.write_text_file('..\\index.html', template(c));
 end
 
@@ -111,106 +283,5 @@ for k, v in pairs(preprocessed_sources) do
 	compile_and_write(template, preprocessed_sources, k, v)
 end
 write_index(template, preprocessed_sources)
-
-do return end
-
-
-
-
--------------------------------------------------------------------------------
--- 세션 리스트 읽어들임
-local sessionsText = readTextFile('session_data/session_list.json')
-local decodeResult, _, err = json.decode(sessionsText)
-if decodeResult == nil then
-	print('session_list.json 해석 중 에러')
-	return
-end
-print('session_list.json 해석 완료.')
-
-local sessions = json.decode(sessionsText).session_list
-
-for _, v in pairs(sessions) do
-	v.tracks = { v.track1, v.track2, v.track3, v.track4 }
-	v.track1 = nil
-	v.track2 = nil
-	v.track3 = nil
-	v.track4 = nil
-
-	v.slidePublic = (v.slidePublic == "공개")
-	v.videoPublic = (v.videoPublic == "공개")
-	v.scriptPublic = (v.scriptPublic == "공개")
-end
-
--------------------------------------------------------------------------------
--- 자바스크립트가 가져갈 수 있도록 포맷 맞춰서 다시 저장
-do
-	local jsPrefix =
-		'if (typeof g_sessionSrcList == "undefined") g_sessionSrcList = [];\n' ..
-		'g_sessionSrcList.push(\n'
-
-	local jsPostfix = '' ..
-		');\n'
-
-	local encodeOption = { indent = true }
-	writeTextFile(
-		'output_server\\session_list.js',
-		jsPrefix .. json.encode({sessions = sessions}, encodeOption) .. jsPostfix)
-end
-print('output_server\\session_list.js 작성 완료.')
-
-
-
--------------------------------------------------------------------------------
-print('세션 html 출력 중...')
-local template = loadTemplate('program/web_template/index.html')
-
-do
-	for _, v in ipairs(sessions) do
-		local script
-		if v.scriptPublic then
-			script = readTextFile('session_data/scripts/' .. v.conf .. '/' .. v.id .. '.txt')
-			if not script then
-				print(string.format('[경고] %s: 스크립트가 공개로 설정되어 있는데 스크립트 파일이 없습니다.', v.id))
-			end
-		else
-			script = '[비공개]'
-		end
-
-		if v.videoPublic and not exists('output_cdn/' .. v.conf .. '/videos/' .. v.id .. '.mp4') then
-			print(string.format('[경고] %s: 비디오가 공개로 설정되어 있는데 비디오 파일이 없습니다.', v.id))
-		end
-
-		if v.slidePublic and not exists('output_cdn/' .. v.conf .. '/slides/' .. v.id .. '/index.html') then
-			print(string.format('[경고] %s: 슬라이드가 공개로 설정되어 있는데 슬라이드 파일이 없습니다.', v.id))
-		end
-
-		local id = v.Id
-		local c =
-		{
-			['NRP_CONFID_HERE'] = v.conf,
-			['NRP_SESSIONID_HERE'] = v.id,
-			['NRP_TITLE_HERE'] = v.title,
-			['NRP_SUBTITLE_HERE'] = v.subtitle or '',
-			['NRP_DESCRIPTION_HERE'] = v.description,
-			['NRP_SPEAKER_HERE'] = v.speaker,
-			['NRP_SPEAKER_INTRO_HERE'] = v.speakerIntro,
-			['NRP_FROM_HERE'] = v.from,
-			['NRP_SCRIPT_HERE'] = script,
-			['NRP_BASE_HREF_HERE'] = ' --> <BASE HREF="../.."/> <!-- ',
-			['NRP_OG_TITLE_HERE'] = ' --> <meta property="og:title" content="NDC Replay - ' .. v.title .. '" /> <!-- ',
-			['NRP_OG_DESCRIPTION_HERE'] = ' --> <meta property="og:description" content="' .. v.description .. '" /> <!-- '
-		}
-
-		local outputDir1 = 'output_server\\' .. v.conf
-		local outputDir2 = 'output_server\\' .. v.conf .. '\\sessions'
-		local outputFile = 'output_server\\' .. v.conf .. '\\sessions\\' .. v.id .. '.html'
-		os.execute(string.format('if not exist %s mkdir %s', outputDir1, outputDir1))
-		os.execute(string.format('if not exist %s mkdir %s', outputDir2, outputDir2))
-
-		--print(outputFile .. ' 작성 중...')
-
-		writeTextFile(outputFile, template(c))
-	end
-end
 
 print('E.N.D\n\n\n')

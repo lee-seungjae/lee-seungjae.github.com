@@ -2,64 +2,35 @@
 <html>
 <head>
 	<title>
-		
-			NDC12 - 실시간 HTTP 양방향 통신
-		
-	</title>
+		NDC12 - 실시간 HTTP 양방향 통신	</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
 	<LINK rel='STYLESHEET' type='text/css' href='syntax/SyntaxHighlighter.css'>
 	<style>
-		body { font-family: "Malgun Gothic"; font-size:13pt; color:#000000; line-height:160%; letter-spacing: -1pt;
-}
+		body { font-family: "Malgun Gothic"; font-size:10pt; color:#404040; line-height:180%; letter-spacing: 0pt; padding:0; margin:0; }
 		.quote { font-size: 13pt; background-color:#f0f0f0; border:1px solid #e0e0e0; font-family: "Malgun Gothic"; padding: 10pt; }
-		h1 { font-size: 12pt; }
-		.bigh1 {
-			font-size: 18pt;
-		}
-		h2 { font-size: 14pt; }
-		h3 { font-size: 13pt; }
-		h4 { font-size: 12pt; }
-		p { padding: 0; margin: 0; }
-		.center {
-			max-width: 600pt;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		.title {
-			text-align: left;
-		}
-		.date {
-			font-size: 11pt;
+		.date_in_article {
+			font-size: 9pt;
 			color: gray;
-			margin-bottom: 40pt;
 		}
-		.text {
+		.date_in_list {
+			font-size: 8pt;
+			color: gray;
 		}
-		.page {
-			border-radius: 12pt;
-			background:#ffffff;
-			padding-top: 40pt;
-			padding-left: 40pt;
-			padding-right: 40pt;
-			padding-bottom: 40pt;
-			margin-bottom: 20pt;
-			-moz-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
-			-webkit-box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
-			box-shadow:0px 0px 20px 7px rgba(0, 0, 0, 0.5);
-		}
-		.nav {
-			text-align: center;
+		.i {
 			color: #6699ff;
 		}
-		.internalLink {
+		a.internal_link {
 			color: #6699ff;
 		}
-		.externalLink {
+		a.internal_link:visited {
+			color: #446688;
+		}
+		a.external_link {
 			color: #008000;
 		}
-		.linkToTop {
-			color: black;
+		a.external_link:visited {
+			color: #004000;
 		}
 		.emptyLine {
 			height: 10pt;
@@ -69,65 +40,175 @@
 		.indent3 { margin-left: 30pt; }
 		.indent4 { margin-left: 40pt; }
 		.indent5 { margin-left: 50pt; }
-		hr { width: 90%; border:0; border-bottom:1px #aaaaaa dashed }
+
+		.header {
+			font-size: 9pt;
+			text-decoration: none;
+			color: #606060;
+		}
+
+		.footer {
+			font-size: 9pt;
+			text-decoration: none;
+			color: #606060;
+		}
+
+		.content {
+			border-top: 1px solid #d0d0d0;
+			border-bottom:1px solid #d0d0d0;
+			padding-top:15pt;
+			padding-bottom:15pt;
+			margin-top:15pt;
+			margin-bottom:15pt;
+		}
+
+		p.compiled { padding:0; margin:0;}
+		hr.compiled { width: 100%; border:0; border-bottom:1px #d0d0d0 dashed; margin-top:10pt; margin-bottom:10pt; }
+		h1.compiled { font-size: 13pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		h2.compiled { font-size: 12pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		h3.compiled { font-size: 11pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		div.compiled_quote { font-family:Lucida Console,monospace; border:1px solid #d0d0d0; font-size:10pt; padding:5pt; color:#808080; background:#fbfbfb; }
+		div.compiled_emptyline { height: 15pt; }
+		li.compiled { margin-left: 15pt;}
+
+		@media (min-width:700px) {
+			.limit {
+				max-width:600pt;
+				margin-left:auto;
+				margin-right:auto;
+			}
+
+			.page {
+				background:#ffffff;
+				padding-top: 20pt;
+				padding-left: 20pt;
+				padding-right: 20pt;
+				padding-bottom: 20pt;
+				margin-bottom: 10pt;
+				border: 1px solid #d0d0d0;
+			}
+		}
+
+		@media (max-width:699px) {
+			.page {
+				background:#ffffff;
+				padding-left: 5pt;
+				padding-right: 5pt;
+				padding-top: 20pt;
+				padding-bottom: 20pt;
+				margin-bottom: 10pt;
+				border: 1px solid #d0d0d0;
+			}
+		}
 	</style>
 </head>
 
-<body bgcolor="#444444" style='margin:30pt'>
-
-	<div class=center>
-		<div class=page>
-			<div class=title>
-				<h1>
-					<a href='index.html' class=linkToTop>lee-seungjae.github.com</a>
-					<a href='rss.xml'><img src='feed16.gif'></a>
-					<br>
-					<font class=bigh1>NDC12 - 실시간 HTTP 양방향 통신</font>
-				</h1>
-			</div>
-			<div class=date>
-				2012-04-25
-			</div>
-			<div class=text>
-				
-<iframe src="http://www.slideshare.net/slideshow/embed_code/12679447?rel=0" width="687" height="486" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="http://www.slideshare.net/devcatpublications/http-ndc2012" title="이승재, 실시간 HTTP 양방향 통신, NDC2012" target="_blank">이승재, 실시간 HTTP 양방향 통신, NDC2012</a> </strong> from <strong><a href="http://www.slideshare.net/devcatpublications" target="_blank">devCAT Studio, NEXON</a></strong> </div><p class='emptyLine'></p>
-<p>2012년 4월 25일, 50분 세션.</p>
-<p class='emptyLine'></p>
-<p class='emptyLine'></p>
-<h2>참고문헌</h2>
-<p class='emptyLine'></p>
-<p>서버 푸시 개념 정리</p>
-<li><a href='http://en.wikipedia.org/wiki/Push_technology' class=externalLink>http://en.wikipedia.org/wiki/Push_technology</a></li>
-<p class='emptyLine'></p>
-<p>Comet 기법 소개</p>
-<li><a href='http://en.wikipedia.org/wiki/Comet_(programming)' class=externalLink>http://en.wikipedia.org/wiki/Comet_(programming)</a></li>
-<p class='emptyLine'></p>
-<p>WebSocket 표준화, 브라우저 지원 현황</p>
-<li><a href='http://en.wikipedia.org/wiki/WebSocket' class=externalLink>http://en.wikipedia.org/wiki/WebSocket</a></li>
-<p class='emptyLine'></p>
-<p>WebSocket과 Socket.io</p>
-<li><a href='http://helloworld.naver.com/helloworld/1336' class=externalLink>http://helloworld.naver.com/helloworld/1336</a></li>
-<p class='emptyLine'></p>
-<p>HTTP Streaming(Hidden iframe)자세히 설명</p>
-<li><a href='http://ajaxpatterns.org/HTTP_Streaming' class=externalLink>http://ajaxpatterns.org/HTTP_Streaming</a></li>
-<p class='emptyLine'></p>
-<p>HTTP Streaming(Hidden iframe)의 문제점들</p>
-<li><a href='http://www.quora.com/Why-would-HTTP-long-polling-be-used-instead-of-HTTP-Streaming-to-achieve-real-time-push-notifications' class=externalLink>http://www.quora.com/Why-would-HTTP-long-polling-be-used-instead-of-HTTP-Streaming-to-achieve-real-time-push-notifications</a></li>
-<p class='emptyLine'></p>
-<p>GMail의 구현 설명</p>
-<li><a href='http://www.ekhoury.com/blog/2007/02/07/ajax-alternatives-gmail-choice/' class=externalLink>http://www.ekhoury.com/blog/2007/02/07/ajax-alternatives-gmail-choice/</a></li>
-<li><a href='http://stackoverflow.com/questions/2481696/how-does-gmail-implement-comet' class=externalLink>http://stackoverflow.com/questions/2481696/how-does-gmail-implement-comet</a></li>
-<p class='emptyLine'></p>
-<p>미들웨어 관련</p>
-<li><a href='http://orbited.org/' class=externalLink>http://orbited.org/</a></li>
-<li><a href='http://socket.io/' class=externalLink>http://socket.io/</a></li>
-<p class='emptyLine'></p>
-<p class='emptyLine'></p>
-
-			</div>
+<body bgcolor="#e0e0e0">
+	<div class='limit'>
+		<div style='margin:10pt; text-align: center;'>
+			<a href='/' class='footer'>lee-seungjae.github.io</a>
 		</div>
-		<div class=nav>
-			<a href='index.html' class=nav>목록으로</a>
+		<div class='page'>
+							<font style='font-size:18pt;'>NDC12 - 실시간 HTTP 양방향 통신</font>
+				<div class='date_in_article' style='padding-left:3pt'>
+					2012-04-25				</div>
+				<div class='content'>
+					<div>
+<iframe src="http://www.slideshare.net/slideshow/embed_code/12679447?rel=0" width="687" height="486" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="http://www.slideshare.net/devcatpublications/http-ndc2012" title="이승재, 실시간 HTTP 양방향 통신, NDC2012" target="_blank">이승재, 실시간 HTTP 양방향 통신, NDC2012</a> </strong> from <strong><a href="http://www.slideshare.net/devcatpublications" target="_blank">devCAT Studio, NEXON</a></strong> </div><br>
+</div>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+2012년 4월 25일, 50분 세션.
+</p>
+<div class="compiled_emptyline">
+</div>
+<div class="compiled_emptyline">
+</div>
+<h2 class="compiled">
+ 참고문헌
+</h2>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+서버 푸시 개념 정리
+</p>
+<li class="compiled">
+<a href="http://en.wikipedia.org/wiki/Push_technology" class="external_link">http://en.wikipedia.org/wiki/Push_technology</a>
+</li>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+Comet 기법 소개
+</p>
+<li class="compiled">
+<a href="http://en.wikipedia.org/wiki/Comet_(programming" class="external_link">http://en.wikipedia.org/wiki/Comet_(programming</a>)
+</li>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+WebSocket 표준화, 브라우저 지원 현황
+</p>
+<li class="compiled">
+<a href="http://en.wikipedia.org/wiki/WebSocket" class="external_link">http://en.wikipedia.org/wiki/WebSocket</a>
+</li>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+WebSocket과 Socket.io
+</p>
+<li class="compiled">
+<a href="http://helloworld.naver.com/helloworld/1336" class="external_link">http://helloworld.naver.com/helloworld/1336</a>
+</li>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+HTTP Streaming(Hidden iframe)자세히 설명
+</p>
+<li class="compiled">
+<a href="http://ajaxpatterns.org/HTTP_Streaming" class="external_link">http://ajaxpatterns.org/HTTP_Streaming</a>
+</li>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+HTTP Streaming(Hidden iframe)의 문제점들
+</p>
+<li class="compiled">
+<a href="http://www.quora.com/Why-would-HTTP-long-polling-be-used-instead-of-HTTP-Streaming-to-achieve-real-time-push-notifications" class="external_link">http://www.quora.com/Why-would-HTTP-long-polling-be-used-instead-of-HTTP-Streaming-to-achieve-real-time-push-notifications</a>
+</li>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+GMail의 구현 설명
+</p>
+<li class="compiled">
+<a href="http://www.ekhoury.com/blog/2007/02/07/ajax-alternatives-gmail-choice/" class="external_link">http://www.ekhoury.com/blog/2007/02/07/ajax-alternatives-gmail-choice/</a>
+</li>
+<li class="compiled">
+<a href="http://stackoverflow.com/questions/2481696/how-does-gmail-implement-comet" class="external_link">http://stackoverflow.com/questions/2481696/how-does-gmail-implement-comet</a>
+</li>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+미들웨어 관련
+</p>
+<li class="compiled">
+<a href="http://orbited.org/" class="external_link">http://orbited.org/</a>
+</li>
+<li class="compiled">
+<a href="http://socket.io/" class="external_link">http://socket.io/</a>
+</li>				</div>
+				<div>
+					<a href='index.html' class='internal_link'>목록으로</a>
+				</div>
+					</div>
+		<div>
+			<center>
+				<a href='http://twitter.com/0xcafea1fa' class='footer'>@0xcafea1fa</a>
+				<span class='footer'>┃</span>
+				<a href='rss.xml' class='footer'>RSS</a>
+			</center>
+			<br>
 		</div>
 	</div>
 	<script class="javascript" src="syntax/shCore.js"></script> 
@@ -147,8 +228,5 @@
 		dp.SyntaxHighlighter.ClipboardSwf = 'syntax/clipboard.swf';
 		dp.SyntaxHighlighter.HighlightAll('code');
 	</script>
-
-
-
 </body>
 </html>
