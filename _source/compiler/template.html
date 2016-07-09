@@ -8,26 +8,35 @@
 	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
 	<LINK rel='STYLESHEET' type='text/css' href='syntax/SyntaxHighlighter.css'>
 	<style>
-		body { font-family: "Malgun Gothic"; font-size:11pt; color:#404040; line-height:160%; letter-spacing: 0pt; padding:0; margin:0; }
+		body { font-family: "Malgun Gothic"; font-size:10pt; color:#404040; line-height:180%; letter-spacing: 0pt; padding:0; margin:0; }
 		.quote { font-size: 13pt; background-color:#f0f0f0; border:1px solid #e0e0e0; font-family: "Malgun Gothic"; padding: 10pt; }
 		h1 { font-size: 12pt; }
 		h2 { font-size: 14pt; }
 		h3 { font-size: 13pt; }
 		h4 { font-size: 12pt; }
 		p { padding: 0; margin: 0; }
-		.date {
+		.date_in_article {
 			font-size: 9pt;
 			color: gray;
 		}
-		.nav {
-			text-align: center;
+		.date_in_list {
+			font-size: 8pt;
+			color: gray;
+		}
+		.i {
 			color: #6699ff;
 		}
-		.internalLink {
+		a.internal_link {
 			color: #6699ff;
 		}
-		.externalLink {
+		a.internal_link:visited {
+			color: #446688;
+		}
+		a.external_link {
 			color: #008000;
+		}
+		a.external_link:visited {
+			color: #004000;
 		}
 		.emptyLine {
 			height: 10pt;
@@ -38,6 +47,12 @@
 		.indent4 { margin-left: 40pt; }
 		.indent5 { margin-left: 50pt; }
 		hr { width: 90%; border:0; border-bottom:1px #a0a0a0 dotted }
+
+		.header {
+			font-size: 9pt;
+			text-decoration: none;
+			color: #606060;
+		}
 
 		.footer {
 			font-size: 9pt;
@@ -59,10 +74,6 @@
 				max-width:500pt;
 				margin-left:auto;
 				margin-right:auto;
-			}
-
-			body {
-				margin: 20pt;
 			}
 
 			.page {
@@ -91,75 +102,87 @@
 </head>
 
 <body bgcolor="#e0e0e0">
-	{% if #ARTICLES == 0 then %}
-		<div class='limit'>
-			<div class='page'>
+	<div class='limit'>
+		<div style='margin:10pt; text-align: center;'>
+			<a href='/' class='footer'>lee-seungjae.github.io</a>
+		</div>
+		<div class='page'>
+			{% if #PAGES == 0 then %}
 				<font style='font-size:18pt;'>{{TITLE}}</font>
-				<div class='date'>
+				<div class='date_in_article'>
 					{{FIRST_DATE}}
 				</div>
 				<div class='content'>
 					{{CONTENT}}
 				</div>
 				<div>
-					<a href='index.html' class='nav'>목록으로</a>
+					<a href='index.html' class='internal_link'>목록으로</a>
 				</div>
-			</div>
-			<div>
-				<center>
-					<a href='index.html' class='footer'>lee-seungjae.github.com</a>
-					<br>
-					<a href='http://twitter.com/0xcafea1fa' class='footer'>@0xcafea1fa</a>
-					<span class='footer'>┃</span>
-					<a href='rss.xml' class='footer'>RSS</a>
-				</center>
-			</div>
-		</div>
-		<script class="javascript" src="syntax/shCore.js"></script> 
-		<script class="javascript" src="syntax/shBrushCSharp.js"></script> 
-		<script class="javascript" src="syntax/shBrushCpp.js"></script> 
-		<script class="javascript" src="syntax/shBrushCss.js"></script> 
-		<script class="javascript" src="syntax/shBrushDelphi.js"></script> 
-		<script class="javascript" src="syntax/shBrushJScript.js"></script> 
-		<script class="javascript" src="syntax/shBrushJava.js"></script> 
-		<script class="javascript" src="syntax/shBrushPhp.js"></script> 
-		<script class="javascript" src="syntax/shBrushPython.js"></script> 
-		<script class="javascript" src="syntax/shBrushRuby.js"></script> 
-		<script class="javascript" src="syntax/shBrushSql.js"></script> 
-		<script class="javascript" src="syntax/shBrushVb.js"></script> 
-		<script class="javascript" src="syntax/shBrushXml.js"></script> 
-		<script class="javascript"> 
-			dp.SyntaxHighlighter.ClipboardSwf = 'syntax/clipboard.swf';
-			dp.SyntaxHighlighter.HighlightAll('code');
-		</script>
-	{% else %}
-	<div class=center>
-		<div class=page>
-			<div class=title>
-				<h1>
-					<a href='index.html' class=linkToTop>lee-seungjae.github.com</a>
-					<a href='rss.xml'><img src='feed16.gif'></a>
-					<br>
-				</h1>
-			</div>
-			<div class=date>
-			</div>
-			<div class=text>
-			{% for _, slide in ipairs(SLIDES) do %}
-				<li><a href='$link' class=internalLink>{{slide.TITLE}}</a>
-					<span class=date>{{slide.DATE}}</span></li>
+			{% else %}
+				<div>
+					<font style='font-size:12pt;'>소개</font>
+					<div style='margin-left:20pt; margin-top:5pt; margin-bottom:20pt;'>
+						이승재<br>
+						게임 개발자, 소프트웨어 엔지니어<br>
+						devCAT Studio/NEXON<br>
+						마비노기 듀얼<br>
+						마비노기 2: 아레나<br>
+						데스크탑 히어로즈<br>
+						카바티나 스토리<br>
+					</div>
+				</div>
+				<div>
+					<font style='font-size:12pt;'>슬라이드</font>
+					<div style='margin-left:20pt; margin-top:5pt; margin-bottom:20pt;'>
+						{% for _, page in ipairs(PAGES) do
+							if page.TYPE == 'SLIDE' then %}
+								<div>
+									<a href='{{page.LINK}}' class='internal_link'>{{page.TITLE}}</a>
+										<span class='date_in_list'>{{page.DATE}}</span>
+								</div>
+							{% end
+						end %}
+					</div>
+				</div>
+				<div>
+					<font style='font-size:12pt;'>글</font>
+					<div style='margin-left:20pt; margin-top:5pt; margin-bottom:0pt;'>
+						{% for _, page in ipairs(PAGES) do
+							if page.TYPE == 'SLIDE' then %}
+							<div>
+								<a href='{{page.LINK}}' class='internal_link'>{{page.TITLE}}</a>
+									<span class='date_in_list'>{{page.DATE}}</span>
+							</div>
+							{% end
+						end %}
+					</div>
+				</div>
 			{% end %}
-			</div>
-			<div class=text>
-			{% for _, article in ipairs(ARTICLES) do %}
-				<li><a href='$link' class=internalLink>{{article.TITLE}}</a>
-					<span class=date>{{article.DATE}}</span></li>
-			{% end %}
-			</div>
 		</div>
-		<div class=nav>
+		<div>
+			<center>
+				<a href='http://twitter.com/0xcafea1fa' class='footer'>@0xcafea1fa</a>
+				<span class='footer'>┃</span>
+				<a href='rss.xml' class='footer'>RSS</a>
+			</center>
 		</div>
 	</div>
-{% end %}
+	<script class="javascript" src="syntax/shCore.js"></script> 
+	<script class="javascript" src="syntax/shBrushCSharp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCpp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCss.js"></script> 
+	<script class="javascript" src="syntax/shBrushDelphi.js"></script> 
+	<script class="javascript" src="syntax/shBrushJScript.js"></script> 
+	<script class="javascript" src="syntax/shBrushJava.js"></script> 
+	<script class="javascript" src="syntax/shBrushPhp.js"></script> 
+	<script class="javascript" src="syntax/shBrushPython.js"></script> 
+	<script class="javascript" src="syntax/shBrushRuby.js"></script> 
+	<script class="javascript" src="syntax/shBrushSql.js"></script> 
+	<script class="javascript" src="syntax/shBrushVb.js"></script> 
+	<script class="javascript" src="syntax/shBrushXml.js"></script> 
+	<script class="javascript"> 
+		dp.SyntaxHighlighter.ClipboardSwf = 'syntax/clipboard.swf';
+		dp.SyntaxHighlighter.HighlightAll('code');
+	</script>
 </body>
 </html>

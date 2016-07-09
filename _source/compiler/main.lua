@@ -64,11 +64,26 @@ local function compile_and_write(template, preprocessed_sources, doc_id, pp)
 		TITLE = pp.meta['제목'],
 		CONTENT = compiled_text,
 		FIRST_DATE = '퍼스트_데이트',
-		ARTICLES = {},
-		SLIDES = {},
+		PAGES = {},
 	}
 
 	io_ext.write_text_file('..\\' .. doc_id .. '.html', template(c))
+end
+
+-------------------------------------------------------------------------------
+local function write_index(template, preprocessed_sources)
+	local c = {
+		TITLE = '',
+		CONTENT = '',
+		PAGES = {
+			{ LINK='link', TITLE='title', DATE='date', TYPE='SLIDE' },
+			{ LINK='link', TITLE='title', DATE='date', TYPE='SLIDE' },
+			{ LINK='link', TITLE='title', DATE='date', TYPE='' },
+			{ LINK='link', TITLE='title', DATE='date', TYPE='' },
+			{ LINK='link', TITLE='title', DATE='date', TYPE='' },
+		}
+	}	
+	io_ext.write_text_file('..\\index.html', template(c));
 end
 
 -------------------------------------------------------------------------------
@@ -95,6 +110,7 @@ end
 for k, v in pairs(preprocessed_sources) do
 	compile_and_write(template, preprocessed_sources, k, v)
 end
+write_index(template, preprocessed_sources)
 
 do return end
 
