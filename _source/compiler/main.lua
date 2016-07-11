@@ -246,7 +246,7 @@ local function write_index(template, preprocessed_sources)
 			TITLE = v.meta['제목'],
 			DATE = v.meta['작성'],
 			TYPE = v.meta['타입']
-		});
+		})
 	end
 
 	table.sort(
@@ -255,7 +255,45 @@ local function write_index(template, preprocessed_sources)
 			return a.DATE > b.DATE
 		end)
 
-	io_ext.write_text_file('..\\index.html', template(c));
+	io_ext.write_text_file('..\\index.html', template(c))
+end
+
+-------------------------------------------------------------------------------
+local function write_rss(template, preprocessed_sources)
+	print('RSS 쓰는 중')
+
+	local c = {
+		ITEMS = {}
+	}
+	for k, v in pairs(preprocessed_sources) do
+		local t = {}
+		for i = 1, 5 do
+			t[i] = v.lines[i]
+		end
+
+		local wdate = v.meta['작성']:split('-')
+		wdate[1] = tonumber(wdate[1])
+		wdate[2] = tonumber(wdate[2])
+		wdate[3] = tonumber(wdate[3])
+		local wt = (os.time{year=wdate[1], month=wdate[2], day=wdate[3], hour=0})
+
+		table.insert(c.ITEMS, {
+			TITLE = v.meta['제목'],
+			PUB_DATE = os.date("%d %b %Y 00:00:00 +0900", wt),
+			CONTENT = table.concat(t, '\n') .. '...',
+			ID = k,
+			utc = wt
+		});
+	end
+
+	table.sort(
+		c.ITEMS,
+		function(a, b)
+			return a.utc > b.utc
+		end)
+	c.ITEMS[11] = nil
+
+	io_ext.write_text_file('..\\rss.xml', template(c))	
 end
 
 -------------------------------------------------------------------------------
@@ -283,5 +321,8 @@ for k, v in pairs(preprocessed_sources) do
 	compile_and_write(template, preprocessed_sources, k, v)
 end
 write_index(template, preprocessed_sources)
+
+local template_rss = load_template('compiler\\template-rss.xml')
+write_rss(template_rss, preprocessed_sources)
 
 print('E.N.D\n\n\n')

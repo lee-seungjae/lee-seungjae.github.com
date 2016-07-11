@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version='0.92'>
+<channel>
+	<docs></docs>
+	<title>lee-seungjae.github.com</title>
+	<link>http://lee-seungjae.github.com/</link>
+	<description></description>
+
+	{% for _, page in ipairs(ITEMS) do %}
+		<item>
+			<title>{{page.TITLE}}</title>
+			<pubDate>{{page.PUB_DATE}}</pubDate>
+			<description>
+			<![CDATA[{*page.CONTENT*}]]>
+			</description>
+			<link>http://lee-seungjae.github.io/{{page.ID}}.html</link>
+		</item>
+	{% end %}
+</channel>
+</rss>
