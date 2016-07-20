@@ -1,8 +1,8 @@
-﻿!제목 = NDC15 - 마비노기 듀얼: 분산 데이터베이스 트랜잭션 설계와 구현
+﻿!제목 = NDC15 - 모바일 게임 개발자로의 변신! 마비노기 듀얼 서버 개발 이야기
 !작성 = 2016-07-19
 !최종수정 = 2016-07-19
 !타입 = SLIDE
 
-[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2015/sessions/NDC2015_0071.html]
+[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2015/sessions/NDC2015_0072.html]
 
 2015년 5월 21일, 50분 세션.
