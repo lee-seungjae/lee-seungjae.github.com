@@ -3,6 +3,6 @@
 !최종수정 = 2016-09-07
 !타입 = SLIDE
 
-[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2015/sessions/NDC2016_0067.html]
+[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2016/sessions/NDC2016_0067.html]
 
 2016년 4월 28일, 50분 세션.
