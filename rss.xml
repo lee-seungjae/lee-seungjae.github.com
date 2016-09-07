@@ -7,6 +7,16 @@
 	<description></description>
 
 			<item>
+			<title>NDC16 - &lt;마비노기 듀얼&gt; 라이브 서비스 사건사고기록</title>
+			<pubDate>07 Sep 2016 00:00:00 +0900</pubDate>
+			<description>
+			<![CDATA[[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2015/sessions/NDC2016_0067.html]
+
+2016년 4월 28일, 50분 세션....]]>
+			</description>
+			<link>http://lee-seungjae.github.io/NDC2016-MabinogiDuelIncidentReport.html</link>
+		</item>
+			<item>
 			<title>NDC15 - 모바일 게임 개발자로의 변신! 마비노기 듀얼 서버 개발 이야기</title>
 			<pubDate>19 Jul 2016 00:00:00 +0900</pubDate>
 			<description>
@@ -107,18 +117,6 @@
 스크립팅 환경을 고를 때는 언어 뿐만 아니라 런타임이 제공하는 기능이나 바인딩의 편의성, 각종 개발 도구들도 함께 고려해야 한다. 그것들이 모두 생산성에 영향을 미치기 때문이다. 어떤 기능은 언어의 기본 런타임에서 잘 지원하기도 하지만, 기본 런타임은 기초적인 API만 제공하고 필요한 기능을 만들든지 적절한 래퍼를 붙여야 할 수도 있다. 다른 환경을 깊게 경험해 보지 않아서 비교하기 어렵지만 루아는 확실히 이런 경향이 심하다. 그저 '된다더라' 로 끝나는 것이 아니라, 기능이 필요해졌을 때 도입 비용이 생길 수 있다. 처음부터 다 만들고 시작하지는 않더라도, 나중에 어느 정도의 비용이 필요할 지 예상해 두면 좋을 것이다....]]>
 			</description>
 			<link>http://lee-seungjae.github.io/ScriptingLanguageConsideration.html</link>
-		</item>
-			<item>
-			<title>greenlet은 어떻게 구현했을까?</title>
-			<pubDate>07 Oct 2011 00:00:00 +0900</pubDate>
-			<description>
-			<![CDATA[지난번 글 [WebServerArchitecture]에 이런 내용이 있었다:
-
- 원래 파이썬에는 코루틴이 없는데, 변종 파이썬 인터프리터인 스택리스 파이썬이 코루틴을 지원했고, 이것을 기본 파이썬 인터프리터에서 사용할 수 있도록 모듈 형태로 만든 것이 greenlet이다.
-
-...]]>
-			</description>
-			<link>http://lee-seungjae.github.io/greenlet.html</link>
 		</item>
 	</channel>
 </rss>
