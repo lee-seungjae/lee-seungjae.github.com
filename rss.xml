@@ -7,6 +7,36 @@
 	<description></description>
 
 			<item>
+			<title>NDC17 - 내가 만든 언어의 개발환경을 Visual Studio Code로 빠르고 쉽게 구축하기</title>
+			<pubDate>09 Aug 2017 00:00:00 +0900</pubDate>
+			<description>
+			<![CDATA[[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2017/sessions/NDC2017_0001.html]
+
+2017년 4월 25일, 50분 세션....]]>
+			</description>
+			<link>http://lee-seungjae.github.io/NDC2017-VSCodeExtensionDevelopment.html</link>
+		</item>
+			<item>
+			<title>NDC17 - NDC Replay 제작기 : static website, static backoffice</title>
+			<pubDate>09 Aug 2017 00:00:00 +0900</pubDate>
+			<description>
+			<![CDATA[[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2017/sessions/NDC2017_0015.html]
+
+2017년 4월 25일, 25분 세션....]]>
+			</description>
+			<link>http://lee-seungjae.github.io/NDC2017-NDCReplay.html</link>
+		</item>
+			<item>
+			<title>NDC17 - 개발자를 위한 제작진행개론: 일정대로 출시하기 왜 &amp; 어떻게</title>
+			<pubDate>09 Aug 2017 00:00:00 +0900</pubDate>
+			<description>
+			<![CDATA[[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2017/sessions/NDC2017_0024.html]
+
+2017년 4월 26일, 50분 세션....]]>
+			</description>
+			<link>http://lee-seungjae.github.io/NDC2017-ProductionManagement.html</link>
+		</item>
+			<item>
 			<title>NDC16 - &lt;마비노기 듀얼&gt; 라이브 서비스 사건사고기록</title>
 			<pubDate>07 Sep 2016 00:00:00 +0900</pubDate>
 			<description>
@@ -17,16 +47,6 @@
 			<link>http://lee-seungjae.github.io/NDC2016-MabinogiDuelIncidentReport.html</link>
 		</item>
 			<item>
-			<title>NDC15 - 모바일 게임 개발자로의 변신! 마비노기 듀얼 서버 개발 이야기</title>
-			<pubDate>19 Jul 2016 00:00:00 +0900</pubDate>
-			<description>
-			<![CDATA[[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2015/sessions/NDC2015_0072.html]
-
-2015년 5월 21일, 50분 세션....]]>
-			</description>
-			<link>http://lee-seungjae.github.io/NDC2015-DuelServerDevelopment.html</link>
-		</item>
-			<item>
 			<title>NDC15 - 마비노기 듀얼: 분산 데이터베이스 트랜잭션 설계와 구현</title>
 			<pubDate>19 Jul 2016 00:00:00 +0900</pubDate>
 			<description>
@@ -35,6 +55,16 @@
 2015년 5월 21일, 50분 세션....]]>
 			</description>
 			<link>http://lee-seungjae.github.io/NDC2015-DistributedTransaction.html</link>
+		</item>
+			<item>
+			<title>NDC15 - 모바일 게임 개발자로의 변신! 마비노기 듀얼 서버 개발 이야기</title>
+			<pubDate>19 Jul 2016 00:00:00 +0900</pubDate>
+			<description>
+			<![CDATA[[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2015/sessions/NDC2015_0072.html]
+
+2015년 5월 21일, 50분 세션....]]>
+			</description>
+			<link>http://lee-seungjae.github.io/NDC2015-DuelServerDevelopment.html</link>
 		</item>
 			<item>
 			<title>인터뷰</title>
@@ -81,42 +111,6 @@
 2013년 4월 24일, 50분 세션....]]>
 			</description>
 			<link>http://lee-seungjae.github.io/CodeHotloadingAndInHouseScriptLanguage.html</link>
-		</item>
-			<item>
-			<title>Array(Vector) vs HashMap</title>
-			<pubDate>21 Jun 2012 00:00:00 +0900</pubDate>
-			<description>
-			<![CDATA[삽입/삭제 패턴이 어떻게 되나?
-조회 패턴이 어떻게 되나?
-얼마나 많은 원소를 담아야 하나?
-얼마나 많은 메모리 오버헤드를 감수할 수 있나?
-담을 원소의 크기는 얼마나 큰가?...]]>
-			</description>
-			<link>http://lee-seungjae.github.io/ArrayVsHashMap.html</link>
-		</item>
-			<item>
-			<title>NDC12 - 실시간 HTTP 양방향 통신</title>
-			<pubDate>25 Apr 2012 00:00:00 +0900</pubDate>
-			<description>
-			<![CDATA[<TAG>
-<iframe src="http://www.slideshare.net/slideshow/embed_code/12679447?rel=0" width="687" height="486" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="http://www.slideshare.net/devcatpublications/http-ndc2012" title="이승재, 실시간 HTTP 양방향 통신, NDC2012" target="_blank">이승재, 실시간 HTTP 양방향 통신, NDC2012</a> </strong> from <strong><a href="http://www.slideshare.net/devcatpublications" target="_blank">devCAT Studio, NEXON</a></strong> </div>
-</TAG>
-
-2012년 4월 25일, 50분 세션....]]>
-			</description>
-			<link>http://lee-seungjae.github.io/BidirectionalHTTP.html</link>
-		</item>
-			<item>
-			<title>게임에 사용할 스크립팅 환경을 고를 때 고려해야 할 것들</title>
-			<pubDate>20 Nov 2011 00:00:00 +0900</pubDate>
-			<description>
-			<![CDATA[지난 8~9일에 부산에서 개최된 ICON에서 [온라인 게임 처음부터 끝까지 동적언어로 만들기:BuildingOnlineGameEntirelyWithDynamicLanguage]를 발표하고 왔다. 여러 달 만에 다시 보니 더 하고 싶은 얘기들이 생겨서 슬라이드를 좀 수정했는데, 분량과 흐름 상 넣지 못했던 주제가 있어서 블로그 포스트로 정리해 본다.
-
--------------------
-
-스크립팅 환경을 고를 때는 언어 뿐만 아니라 런타임이 제공하는 기능이나 바인딩의 편의성, 각종 개발 도구들도 함께 고려해야 한다. 그것들이 모두 생산성에 영향을 미치기 때문이다. 어떤 기능은 언어의 기본 런타임에서 잘 지원하기도 하지만, 기본 런타임은 기초적인 API만 제공하고 필요한 기능을 만들든지 적절한 래퍼를 붙여야 할 수도 있다. 다른 환경을 깊게 경험해 보지 않아서 비교하기 어렵지만 루아는 확실히 이런 경향이 심하다. 그저 '된다더라' 로 끝나는 것이 아니라, 기능이 필요해졌을 때 도입 비용이 생길 수 있다. 처음부터 다 만들고 시작하지는 않더라도, 나중에 어느 정도의 비용이 필요할 지 예상해 두면 좋을 것이다....]]>
-			</description>
-			<link>http://lee-seungjae.github.io/ScriptingLanguageConsideration.html</link>
 		</item>
 	</channel>
 </rss>

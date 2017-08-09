@@ -1,0 +1,8 @@
+﻿!제목 = NDC17 - 내가 만든 언어의 개발환경을 Visual Studio Code로 빠르고 쉽게 구축하기
+!작성 = 2017-08-09
+!최종수정 = 2017-08-09
+!타입 = SLIDE
+
+[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2017/sessions/NDC2017_0001.html]
+
+2017년 4월 25일, 50분 세션.

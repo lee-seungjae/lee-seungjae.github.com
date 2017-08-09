@@ -2,8 +2,7 @@
 <html>
 <head>
 	<title>
-		{{TITLE}}
-	</title>
+		NDC17 - 개발자를 위한 제작진행개론: 일정대로 출시하기 왜 &amp; 어떻게	</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
 	<meta name="viewport" content="width=device-width" />
@@ -111,60 +110,22 @@
 			<a href='/' class='footer'>lee-seungjae.github.io</a>
 		</div>
 		<div class='page'>
-			{% if #PAGES == 0 then %}
-				<font style='font-size:18pt;'>{{TITLE}}</font>
+							<font style='font-size:18pt;'>NDC17 - 개발자를 위한 제작진행개론: 일정대로 출시하기 왜 &amp; 어떻게</font>
 				<div class='date_in_article' style='padding-left:3pt'>
-					{{FIRST_DATE}}
-				</div>
+					2017-08-09				</div>
 				<div class='content'>
-					{*CONTENT*}
-				</div>
+					<p class="compiled">
+<a href="http://ndcreplay.nexon.com/NDC2017/sessions/NDC2017_0024.html" class="external_link">NDC REPLAY 사이트에서 보기</a>
+</p>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+2017년 4월 26일, 50분 세션.
+</p>				</div>
 				<div>
 					<a href='index.html' class='internal_link'>목록으로</a>
 				</div>
-			{% else %}
-				<div>
-					<font style='font-size:12pt;'>소개</font>
-					<div style='margin-left:20pt; margin-top:5pt; margin-bottom:20pt;'>
-						이승재<br>
-						게임 개발자, 소프트웨어 엔지니어<br>
-						devCAT Studio/NEXON<br>
-						<br>
-						실버바인 서버 엔진 2<br>
-						마비노기 듀얼<br>
-						마비노기 2: 아레나<br>
-						데스크탑 히어로즈<br>
-						카바티나 스토리<br>
 					</div>
-				</div>
-				<div>
-					<font style='font-size:12pt;'>슬라이드</font>
-					<div style='margin-left:20pt; margin-top:5pt; margin-bottom:20pt;'>
-						{% for _, page in ipairs(PAGES) do
-							if page.TYPE == 'SLIDE' then %}
-								<div>
-									<a href='{{page.LINK}}' class='internal_link'>{{page.TITLE}}</a>
-										<span class='date_in_list'>{{page.DATE}}</span>
-								</div>
-							{% end
-						end %}
-					</div>
-				</div>
-				<div>
-					<font style='font-size:12pt;'>글</font>
-					<div style='margin-left:20pt; margin-top:5pt; margin-bottom:0pt;'>
-						{% for _, page in ipairs(PAGES) do
-							if page.TYPE ~= 'SLIDE' then %}
-							<div>
-								<a href='{{page.LINK}}' class='internal_link'>{{page.TITLE}}</a>
-									<span class='date_in_list'>{{page.DATE}}</span>
-							</div>
-							{% end
-						end %}
-					</div>
-				</div>
-			{% end %}
-		</div>
 		<div>
 			<center>
 				<a href='http://twitter.com/0xcafea1fa' class='footer'>@0xcafea1fa</a>

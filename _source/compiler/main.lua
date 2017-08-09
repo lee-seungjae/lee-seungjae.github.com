@@ -252,6 +252,9 @@ local function write_index(template, preprocessed_sources)
 	table.sort(
 		c.PAGES,
 		function(a, b)
+			if a.DATE == b.DATE then
+				return a.LINK > b.LINK
+			end
 			return a.DATE > b.DATE
 		end)
 
