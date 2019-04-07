@@ -276,8 +276,9 @@ var Model = /** @class */ (function () {
         return this.problems.length;
     };
     Model.prototype.next = function () {
-        console.assert(!this.isEnded());
-        this.retryCounts.push(this.thisProblemRetryCount);
+        if (!this.isEnded()) {
+            this.retryCounts.push(this.thisProblemRetryCount);
+        }
         this.thisProblemRetryCount = 0;
     };
     Model.prototype.getCurrentProblem = function () {
@@ -371,14 +372,17 @@ var ProblemView = /** @class */ (function () {
         }
         return problem.questionText.length == this.getAnswer().length;
     };
-    ProblemView.prototype.focusToInput = function () {
-        this.$answer.focus();
-    };
     ProblemView.prototype.getAnswer = function () {
         return this.$answer.val().toString();
     };
     ProblemView.prototype.resetAnswerText = function () {
         this.$answer.val('');
+    };
+    ProblemView.prototype.enableInput = function (yes) {
+        this.$answer.prop('disabled', !yes);
+        if (yes) {
+            this.$answer.focus();
+        }
     };
     ProblemView.prototype.show = function (yes) {
         if (yes) {
@@ -520,7 +524,10 @@ $(document).ready(function () {
         model.goToStart();
         pview.setUpQuestion();
         pview.resetAnswerText();
+        wstack.showAndPush(pview);
+        pview.enableInput(true);
         pview.onEnter = function () {
+            pview.enableInput(false);
             var p = model.getCurrentProblem();
             if (pview.getAnswer() === p.rightAnswer) {
                 return showCorrectDlg();
@@ -529,12 +536,10 @@ $(document).ready(function () {
                 return showWrongDlg(p.rightAnswer);
             }
         };
-        wstack.showAndPush(pview);
-        pview.focusToInput();
     }
     //-------------------------------------------------------------------------
     function showCorrectDlg() {
-        var buttonCaption = model.isEnded()
+        var buttonCaption = model.getCurrentProblemNumber() >= model.getTotalProblemCount()
             ? '결과 확인하기 ⏎'
             : '다음 문제 ⏎';
         var dlg = new ModalDialog_1.ModalDialog('correctDlg', 'kf_popin 0.7s', buttonCaption);
@@ -549,6 +554,7 @@ $(document).ready(function () {
             else {
                 pview.setUpQuestion();
                 pview.resetAnswerText();
+                pview.enableInput(true);
             }
         };
     }
@@ -560,7 +566,7 @@ $(document).ready(function () {
         dlg.onClose = function () {
             wstack.hideAndPop(dlg);
             model.retry();
-            pview.focusToInput();
+            pview.enableInput(true);
         };
     }
     //-------------------------------------------------------------------------
