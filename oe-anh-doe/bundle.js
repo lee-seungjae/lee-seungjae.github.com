@@ -509,7 +509,7 @@ var rawData = [
     '이제 너랑 같이 게임 {안|않} 할 거야!'
 ];
 $(document).ready(function () {
-    var problems = Generator_1.generateProblemList(rawData, 2);
+    var problems = Generator_1.generateProblemList(rawData, 5);
     var model = new Model_1.Model(problems);
     var pview = new ProblemView_1.ProblemView(model);
     var rview = new ResultView_1.ResultView(model);
