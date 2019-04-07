@@ -373,7 +373,16 @@ var ProblemView = /** @class */ (function () {
         return problem.questionText.length == this.getAnswer().length;
     };
     ProblemView.prototype.getAnswer = function () {
-        return this.$answer.val().toString();
+        var rv = this.$answer.val().toString();
+        // trim
+        rv = rv.replace(/^\s+|\s+$/g, "");
+        // 중복 공백을 하나의 공백으로
+        var oldLength;
+        do {
+            oldLength = rv.length;
+            rv = rv.replace(/  /g, ' ');
+        } while (rv.length < oldLength);
+        return rv;
     };
     ProblemView.prototype.resetAnswerText = function () {
         this.$answer.val('');
