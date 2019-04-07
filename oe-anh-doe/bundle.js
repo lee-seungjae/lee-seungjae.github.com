@@ -153,6 +153,99 @@ function randomInt(n) {
 
 /***/ }),
 
+/***/ "./build/oe-anh-doe/src/ModalDialog.js":
+/*!*********************************************!*\
+  !*** ./build/oe-anh-doe/src/ModalDialog.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var ModalDialog = /** @class */ (function () {
+    function ModalDialog(nodeId, animationStyle, buttonCaption) {
+        var _this = this;
+        this.animationStyle = animationStyle;
+        this.$background = $('#modalBackground');
+        var child = function (cname) { return $("#modalBackground " + cname); };
+        this.$window = child('#' + nodeId);
+        this.$closeButton = child('#closeButton');
+        this.$closeButton.text(buttonCaption);
+        this.$closeButton.click(function () { return _this.onClose(); });
+        this.$closeButton.focus();
+    }
+    ModalDialog.prototype.onEnterKey = function () {
+        this.onClose();
+    };
+    ModalDialog.prototype.findChild = function (selector) {
+        return this.$window.find(selector);
+    };
+    ModalDialog.prototype.show = function (yes) {
+        if (yes) {
+            this.$background.show();
+            this.$window.css('animation', this.animationStyle);
+            this.$window.show();
+        }
+        else {
+            this.$background.hide();
+            this.$window.hide();
+        }
+    };
+    return ModalDialog;
+}());
+exports.ModalDialog = ModalDialog;
+//# sourceMappingURL=ModalDialog.js.map
+
+/***/ }),
+
+/***/ "./build/oe-anh-doe/src/ModalWindow.js":
+/*!*********************************************!*\
+  !*** ./build/oe-anh-doe/src/ModalWindow.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var ModalWindowStack = /** @class */ (function () {
+    function ModalWindowStack() {
+        var _this = this;
+        this.windows = [];
+        document.onkeypress = (function (event) {
+            if (event.keyCode === 13) {
+                event.stopPropagation();
+                var len = _this.windows.length;
+                if (len == 0) {
+                    return;
+                }
+                // 콜백 실행 {
+                // 이 안에서 this.windows가 바뀔 수 있음.
+                _this.windows[len - 1].onEnterKey();
+                // 콜백 실행 }
+            }
+        });
+    }
+    ModalWindowStack.prototype.showAndPush = function (wnd) {
+        console.assert(this.windows.findIndex(function (v) { return v == wnd; }) < 0);
+        this.windows.push(wnd);
+        wnd.show(true);
+    };
+    ModalWindowStack.prototype.hideAndPop = function (wnd) {
+        var len = this.windows.length;
+        console.assert(len > 0);
+        console.assert(this.windows[len - 1] == wnd);
+        this.windows.pop();
+        wnd.show(false);
+    };
+    return ModalWindowStack;
+}());
+exports.ModalWindowStack = ModalWindowStack;
+//# sourceMappingURL=ModalWindow.js.map
+
+/***/ }),
+
 /***/ "./build/oe-anh-doe/src/Model.js":
 /*!***************************************!*\
   !*** ./build/oe-anh-doe/src/Model.js ***!
@@ -168,24 +261,40 @@ var Model = /** @class */ (function () {
         this.retryCounts = [];
         this.thisProblemRetryCount = 0;
         this.problems = problems;
-        this.currentProblemNumber = 1;
-        this.totalProblemCount = problems.length;
     }
     Model.prototype.goToStart = function () {
         this.retryCounts = [];
-        this.currentProblemNumber = 1;
         this.thisProblemRetryCount = 0;
     };
     Model.prototype.retry = function () {
         ++this.thisProblemRetryCount;
     };
+    Model.prototype.getCurrentProblemNumber = function () {
+        return this.retryCounts.length + 1;
+    };
+    Model.prototype.getTotalProblemCount = function () {
+        return this.problems.length;
+    };
     Model.prototype.next = function () {
+        console.assert(!this.isEnded());
         this.retryCounts.push(this.thisProblemRetryCount);
         this.thisProblemRetryCount = 0;
-        ++this.currentProblemNumber;
     };
     Model.prototype.getCurrentProblem = function () {
-        return this.problems[this.currentProblemNumber - 1];
+        return this.problems[this.getCurrentProblemNumber() - 1];
+    };
+    Model.prototype.isEnded = function () {
+        return this.retryCounts.length == this.problems.length;
+    };
+    Model.prototype.wasPerfect = function () {
+        console.assert(this.isEnded());
+        for (var _i = 0, _a = this.retryCounts; _i < _a.length; _i++) {
+            var c = _a[_i];
+            if (c > 0) {
+                return false;
+            }
+        }
+        return true;
     };
     return Model;
 }());
@@ -214,21 +323,56 @@ var ProblemView = /** @class */ (function () {
         this.$enterButton = $('#problemDlg #enterButton');
         this.$currentProblemNumber = $('#problemDlg #currentProblemNumber');
         this.$totalProblemCount = $('#problemDlg #totalProblemCount');
-        this.$answer.keypress(function (event) {
-            if (event.originalEvent.keyCode === 13) {
-                _this.onEnter();
-                event.stopPropagation();
-            }
-        });
-        this.$enterButton.click(function () {
-            _this.onEnter();
-        });
+        this.$enterButton.click(function () { return _this.onEnterKey(); });
+        this.$answer.keyup(function () { _this.updateQuestionText(); _this.updateEnterButton(); });
     }
+    ProblemView.prototype.onEnterKey = function () {
+        if (this.canEnter()) {
+            this.onEnter();
+        }
+    };
     ProblemView.prototype.setUpQuestion = function () {
-        this.$currentProblemNumber.text(this.model.currentProblemNumber);
-        this.$totalProblemCount.text(this.model.totalProblemCount);
-        this.$question.text(this.model.getCurrentProblem().questionText);
-        this.$answer.val('').focus();
+        this.$currentProblemNumber.text(this.model.getCurrentProblemNumber());
+        this.$totalProblemCount.text(this.model.getTotalProblemCount());
+        this.$answer.val('');
+        this.updateQuestionText();
+        this.updateEnterButton();
+    };
+    ProblemView.prototype.updateQuestionText = function () {
+        var problem = this.model.getCurrentProblem();
+        if (problem == null) {
+            return;
+        }
+        var qtext = problem.questionText;
+        var atext = this.getAnswer();
+        this.$question.empty();
+        for (var i = 0; i < qtext.length; ++i) {
+            var qchar = qtext.charAt(i);
+            var achar = atext.charAt(i);
+            var chrNode = $("<span>").text(qchar);
+            if (i >= atext.length) {
+                chrNode.css('background', '#faa');
+            }
+            else if (qchar != achar) {
+                chrNode.css('background', 'yellow');
+            }
+            this.$question.append(chrNode);
+        }
+    };
+    ProblemView.prototype.updateEnterButton = function () {
+        var yes = this.canEnter();
+        this.$enterButton.removeClass(yes ? 'gray' : 'blue');
+        this.$enterButton.addClass(yes ? 'blue' : 'gray');
+    };
+    ProblemView.prototype.canEnter = function () {
+        var problem = this.model.getCurrentProblem();
+        if (problem == null) {
+            return false;
+        }
+        return problem.questionText.length == this.getAnswer().length;
+    };
+    ProblemView.prototype.focusToInput = function () {
+        this.$answer.focus();
     };
     ProblemView.prototype.getAnswer = function () {
         return this.$answer.val().toString();
@@ -278,13 +422,14 @@ var ResultView = /** @class */ (function () {
             _this.onRetry();
         });
     }
+    ResultView.prototype.onEnterKey = function () {
+        this.onRetry();
+    };
     ResultView.prototype.update = function () {
         this.$tbody.empty();
-        var retryCountSum = 0;
         for (var i in this.model.problems) {
             var p = this.model.problems[i];
             var c = this.model.retryCounts[i];
-            retryCountSum += c;
             var tr = void 0;
             if (c == 0) {
                 tr = this.$trYesTemplate.clone(false, true);
@@ -296,13 +441,13 @@ var ResultView = /** @class */ (function () {
             tr.find('#question').text(p.questionText);
             this.$tbody.append(tr);
         }
-        if (retryCountSum > 0) {
-            this.$retryButton.show();
-            this.$perfect.hide();
-        }
-        else {
+        if (this.model.wasPerfect()) {
             this.$retryButton.hide();
             this.$perfect.show();
+        }
+        else {
+            this.$retryButton.show();
+            this.$perfect.hide();
         }
     };
     ResultView.prototype.show = function (yes) {
@@ -330,96 +475,109 @@ exports.ResultView = ResultView;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Generator_1 = __webpack_require__(/*! ./Generator */ "./build/oe-anh-doe/src/Generator.js");
 var Model_1 = __webpack_require__(/*! ./Model */ "./build/oe-anh-doe/src/Model.js");
 var ProblemView_1 = __webpack_require__(/*! ./ProblemView */ "./build/oe-anh-doe/src/ProblemView.js");
 var ResultView_1 = __webpack_require__(/*! ./ResultView */ "./build/oe-anh-doe/src/ResultView.js");
-// TODO:
-// 문제에 같은/다른 텍스트 하이라이트 표시
+var ModalDialog_1 = __webpack_require__(/*! ./ModalDialog */ "./build/oe-anh-doe/src/ModalDialog.js");
+var ModalWindow_1 = __webpack_require__(/*! ./ModalWindow */ "./build/oe-anh-doe/src/ModalWindow.js");
+var Generator_1 = __webpack_require__(/*! ./Generator */ "./build/oe-anh-doe/src/Generator.js");
 var rawData = [
-    '{벚|벗|벛|벋|벝|벘}{꽃|꼿|꽂|꽅|꼳|꽀} 가지를 {꼿꼿|꽂꽂|꽃꽃|꼳꼳|꽅꽅|꽀꽀}하게 {꽂|꼿|꽃|꼳|꽅|꽀}{았|앗}다',
-    '<이를 빼야|밥을 먹어야|게임을 해야|학교에 가야|히녹스를 잡아야|리퍼부터 죽여야> 하는{데|대} 말이{에|애}요',
-    '<짐승같이|괴물같이|좀비가|투명드래곤이> 울부{짖|짓|짗|짇|짙|짔}{었|엇}다',
-    '난 {했|햇}으니까 다음은 네 차{례|래|레}야',
-    '숲 한가운{데|대}{에|애} <마스터 소드가|연필이|삽이> {꽂|꼿|꽃|꽅|꼳|꽀}혀 {있|잇}{었|엇}{대|데}',
-    '거기 {갔|갓}다 온 기억이 안 나는{데|대}요',
-    '빙그{레|래} 웃으시더니 말{씀|슴}하{셨|셧}다',
-    '당장 <의자|벤치>{에|애} {앉아|안자}라',
+    '{벚|벗|벛|벋|벝|벘}{꽃|꼿|꽂|꽅|꼳|꽀} 가지를 {꼿꼿|꽂꽂|꽃꽃|꼳꼳|꽅꽅|꽀꽀}하게 {꽂|꼿|꽃|꼳|꽅|꽀}{았|앗}다.',
+    '<이를 빼야|밥을 먹어야|게임을 해야|학교에 가야|히녹스를 잡아야|리퍼부터 죽여야> 하는{데|대} 말이{에|애}요.',
+    '<짐승같이|괴물같이|좀비가|투명드래곤이> 울부{짖|짓|짗|짇|짙|짔}{었|엇}다.',
+    '난 {했|햇}으니까 다음은 네 차{례|래|레}야.',
+    '숲 한가운{데|대}{에|애} <마스터 소드가|연필이|삽이> {꽂|꼿|꽃|꽅|꼳|꽀}혀 {있|잇}{었|엇}{대|데}.',
+    '거기 {갔|갓}다 온 기억이 안 나는{데|대}요.',
+    '빙그{레|래} 웃으시더니 말{씀|슴}하{셨|셧}다.',
+    '당장 <의자|벤치>{에|애} {앉아|안자}라.',
     '<그늘|나무 밑>{에|애} 가서 잠깐 쉴까?',
-    '물고기가 펄{떡|덕}거{렸|렷}다',
+    '물고기가 펄{떡|덕}거{렸|렷}다.',
     '{옛|옜}날 <집 안|사람|서울|마을>의 모습',
-    '글{씨|시}를 잘 {썼|썻}다',
-    '주말 오전에는 {게|께|개|깨}임을 하면 안 {되|돼}는 거 잘 알{잖|잔}아',
+    '글{씨|시}를 잘 {썼|썻}다.',
+    '주말 오전에는 {게|께|개|깨}임을 하면 안 {되|돼}는 거 잘 알{잖|잔}아?',
     '내가 {왜|외} 그{래|레}야 {돼|되}?',
-    '양치를 하지 {않|안}으면 너의 치아가 무사하지 못할 것이다',
+    '양치를 하지 {않|안}으면 너의 치아가 무사하지 못할 것이다!',
     '그러면 {안|않} {돼|되}!',
-    '그걸 먹으면 안 {돼|되}',
+    '그걸 먹으면 안 {돼|되}!',
     '그러면 {안|않} {돼|되}요!',
-    '그걸 먹으면 안 {되|돼}지',
+    '그걸 먹으면 안 {되|돼}지.',
     '그러면 {안|않} {됩|됍}니다!',
     '그러면 {왜|외} {안|않} {돼|되}?',
-    '그러지 {않|안}{았|앗}다',
-    '그러지 {않|안}기로 {했|햇}{잖|잔}아',
-    '그러지 {않|안}고는 살 수가 없{었|엇}어요',
+    '그러지 {않|안}{았|앗}다.',
+    '그러지 {않|안}기로 {했|햇}{잖|잔}아?',
+    '그러지 {않|안}고는 살 수가 없{었|엇}어요.',
     '이제 너랑 같이 게임 {안|않} 할 거야!'
 ];
 $(document).ready(function () {
-    //return testResultView();
-    var problems = Generator_1.generateProblemList(rawData, 5);
+    var problems = Generator_1.generateProblemList(rawData, 2);
     var model = new Model_1.Model(problems);
     var pview = new ProblemView_1.ProblemView(model);
     var rview = new ResultView_1.ResultView(model);
-    function reset() {
-        rview.show(false);
+    var wstack = new ModalWindow_1.ModalWindowStack();
+    showProblemView();
+    //-------------------------------------------------------------------------
+    function showProblemView() {
         model.goToStart();
         pview.setUpQuestion();
         pview.resetAnswerText();
-        pview.show(true);
+        pview.onEnter = function () {
+            var p = model.getCurrentProblem();
+            if (pview.getAnswer() === p.rightAnswer) {
+                return showCorrectDlg();
+            }
+            else {
+                return showWrongDlg(p.rightAnswer);
+            }
+        };
+        wstack.showAndPush(pview);
+        pview.focusToInput();
     }
-    pview.onEnter = function () {
-        var p = model.getCurrentProblem();
-        if (pview.getAnswer() !== p.rightAnswer) {
-            alert("\uD2C0\uB838\uC5B4\uC694.. \uD83D\uDE22\n\n\uC815\uB2F5\uC740 \"" + p.rightAnswer + "\" \uC785\uB2C8\uB2E4.\n\n\uB2E4\uC2DC \uD574\uBCFC\uAE4C\uC694?");
+    //-------------------------------------------------------------------------
+    function showCorrectDlg() {
+        var buttonCaption = model.isEnded()
+            ? '결과 확인하기 ⏎'
+            : '다음 문제 ⏎';
+        var dlg = new ModalDialog_1.ModalDialog('correctDlg', 'kf_popin 0.7s', buttonCaption);
+        wstack.showAndPush(dlg);
+        dlg.onClose = function () {
+            wstack.hideAndPop(dlg);
+            model.next();
+            if (model.isEnded()) {
+                wstack.hideAndPop(pview);
+                showResultView();
+            }
+            else {
+                pview.setUpQuestion();
+                pview.resetAnswerText();
+            }
+        };
+    }
+    //-------------------------------------------------------------------------
+    function showWrongDlg(rightAnswer) {
+        var dlg = new ModalDialog_1.ModalDialog('wrongDlg', 'kf_drop 0.7s', '다시 해보기 ⏎');
+        dlg.findChild('#rightAnswer').text(rightAnswer);
+        wstack.showAndPush(dlg);
+        dlg.onClose = function () {
+            wstack.hideAndPop(dlg);
             model.retry();
-            pview.resetAnswerText();
-            return;
-        }
-        alert('맞았어요! 👏');
-        model.next();
-        if (model.getCurrentProblem()) {
-            pview.setUpQuestion();
-            pview.resetAnswerText();
+            pview.focusToInput();
+        };
+    }
+    //-------------------------------------------------------------------------
+    function showResultView() {
+        rview.update();
+        if (model.wasPerfect()) {
+            rview.onRetry = function () { };
         }
         else {
-            pview.show(false);
-            rview.update();
-            rview.show(true);
+            rview.onRetry = function () {
+                wstack.hideAndPop(rview);
+                showProblemView();
+            };
         }
-    };
-    rview.onRetry = function () {
-        reset();
-    };
-    // 초기화
-    reset();
+        wstack.showAndPush(rview);
+    }
 });
-function testResultView() {
-    var problems = [
-        { questionText: '외않되', rightAnswer: '왜안돼' },
-        { questionText: '시럽계', rightAnswer: '실업계' },
-        { questionText: '사생활치매', rightAnswer: '사생활침해' }
-    ];
-    var model = new Model_1.Model(problems);
-    var rview = new ResultView_1.ResultView(model);
-    model.goToStart();
-    model.next();
-    model.retry();
-    model.next();
-    model.retry();
-    model.retry();
-    model.next();
-    rview.update();
-    rview.onRetry = function () { return alert('RETRY'); };
-}
 //# sourceMappingURL=main.js.map
 
 /***/ })
