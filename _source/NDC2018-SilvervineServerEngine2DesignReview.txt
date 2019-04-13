@@ -1,0 +1,8 @@
+﻿!제목 = NDC18 - 실버바인 서버엔진 2 설계 리뷰
+!작성 = 2019-04-13
+!최종수정 = 2019-04-13
+!타입 = SLIDE
+
+[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2018/sessions/NDC2018_0075.html]
+
+2018년 4월 26일, 50분 세션.
