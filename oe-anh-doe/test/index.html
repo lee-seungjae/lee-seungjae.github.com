@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
+	<style>
+        .dialog {
+            position:absolute;
+            margin:auto;
+            top:0;
+            right:0;
+            bottom:0;
+            left:0; 
+        }
+
+        /* https://www.w3schools.com/howto/howto_css_modals.asp */
+        .modalBackground {
+            display: nodne; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+        }
+        .modalDialog {
+            margin: 15% auto; /* 15% from the top and centered */
+        }
+
+        /* https://stackoverflow.com/questions/40549227/how-to-create-a-pop-up-animation-with-a-modal-using-css/40549695 */
+        @keyframes kf_popin {
+            0%{
+                transform: scale(0);
+            }
+            50%{
+                transform: scale(1.2);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+
+        @keyframes kf_drop {
+            0%{
+                transform: translatey(-500px);
+            }
+            100%{
+                transform: translatey(0px);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src='bundle.js?v4'></script>
+</head>
+<body bgcolor="#e0e0e0">
+    <div id='problemDlg' class='dialog' style='width:1000px; height:700px; display:none;'>
+        <div class="ui raised segment" style='padding:40px;'>
+            <div class="ui" style="color: #999;"><span id="currentProblemNumber">1</span> / <span id="totalProblemCount">10</span></div>
+
+            <div id="question" class="ui label" style='font-size:20px; width:925px; padding-left:21px; margin-left:0'>
+                &nbsp;
+            </div>
+
+            <div class="ui" style="color: #999; margin-top:40px;">
+                위 문장의 잘못된 곳을 올바르게 고쳐서 입력하세요.<br/>
+                잘못된 곳이 없다면 그대로 입력하세요.<br/>
+            </div>
+
+            <div class="ui action left input" style='margin-top:20px'>
+                <input id="answer" type="text" placeholder="" style='width:850px; font-size:20px;'/>
+                <div id="enterButton" class="ui blue button" style='font-size:20px;'>⏎</div>
+            </div>
+        </div>
+    </div>
+
+    <div id='resultDlg' class='dialog' style='width:800px; margin-top:10%; display:none;'>
+        <div class="ui raised segment" style='padding:40px;'>
+            <table class="ui celled table">
+                <thead>
+                  <tr>
+                    <th style='width:80%'>문제</th>
+                    <th>결과</th>
+                  </tr>
+                </thead>
+                <tbody id='tbody'>
+                  <tr id='trNo'>
+                    <td id='question'></td>
+                    <td class="negative"><i class="icon close"></i> <span id='retryCount'></span>번 틀림</td>
+                  </tr>
+                  <tr id='trYes'>
+                    <td id='question'></td>
+                    <td class="positive"><i class="icon checkmark"></i> 한번에 통과!</td>
+                  </tr>
+                </tbody>
+            </table>
+
+            <div style='text-align:center;'>
+                <div id="retryButton" class="ui blue button" style='font-size:20px; margin-top:20px;'>재도전! ⏎</div>
+            </div>
+            <div style='text-align:center;'>
+                <div id="perfect" style='font-size:20px; margin-top:30px;'>😄 모두 한번에 통과했어요!</div>
+            </div>
+        </div>
+    </div>    
+
+    <div id="modalBackground" class="modalBackground" style='display:none;'>
+        <div id="correctDlg" class="modalDialog" style='width:500px; display:none;'>
+            <div class="ui success message" style='padding:40px; text-align:center;'>
+                <div class="header" style='font-size:30px;'>맞았어요! 👏👏👏</div>
+
+                <div id="closeButton" class="ui success button" style='font-size:20px; margin-top:50px;'>CLOSE</div>
+            </div>
+        </div>
+
+        <div id="wrongDlg" class='modalDialog' style='width:800px; display:none;'>
+            <div class="ui warning message" style='padding:40px; text-align:center;'>
+                <div class="header" style='font-size:30px;'>틀렸어요... 😢</div>
+                <br/>
+                <div style='font-size:20px; font-weight:bold; margin-top:30px;'>
+                    정답: "<span id='rightAnswer'>이번에 가 본 맛집은 너무 맛있어서 그 맛을 가늠할 수가 없었어요.</span>"
+                </div>
+
+                <div id="closeButton" class="ui orange button" style='font-size:20px; margin-top:50px;'>CLOSE</div>
+            </div>
+        </div>
+    </div>
+<br/>
+
+</body>
+</html>
