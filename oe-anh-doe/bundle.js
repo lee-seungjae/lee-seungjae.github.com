@@ -216,6 +216,7 @@ var ModalWindowStack = /** @class */ (function () {
         document.onkeypress = (function (event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
+                event.preventDefault();
                 var len = _this.windows.length;
                 if (len == 0) {
                     return;
@@ -519,7 +520,8 @@ var rawData = [
     '그러지 {않|안}{았|앗}다.',
     '그러지 {않|안}기로 {했|햇}{잖|잔}아?',
     '그러지 {않|안}고는 살 수가 없{었|엇}어요.',
-    '이제 너랑 같이 게임 {안|않} 할 거야!'
+    '이제 너랑 같이 게임 {안|않} 할 거야!',
+    '발 {밟|발|밥}지 {않|안}기!'
 ];
 $(document).ready(function () {
     var problems = Generator_1.generateProblemList(rawData, 5);
