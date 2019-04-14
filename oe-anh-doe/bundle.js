@@ -86,6 +86,57 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./build/oe-anh-doe/src/FeedbackDlg.js":
+/*!*********************************************!*\
+  !*** ./build/oe-anh-doe/src/FeedbackDlg.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var FeedbackDlg = /** @class */ (function () {
+    function FeedbackDlg(nodeId, animationStyle) {
+        var _this = this;
+        this.animationStyle = animationStyle;
+        this.$background = $('#modalBackground');
+        this.$window = $("#modalBackground #" + nodeId);
+        this.$closeButton = this.findChild('#closeButton');
+        this.$closeButton.click(function (ev) { _this.endModal(); ev.preventDefault(); ev.stopPropagation(); });
+    }
+    FeedbackDlg.prototype.findChild = function (selector) {
+        return this.$window.find(selector);
+    };
+    FeedbackDlg.prototype.doModal = function (buttonCaption) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            console.assert(_this.resolve === undefined);
+            _this.resolve = resolve;
+            // UI 이벤트에서 에러핸들링하기가 마땅찮아서
+            // reject는 쓰지 않는다
+            _this.$closeButton.text(buttonCaption);
+            _this.$background.show();
+            _this.$window.css('animation', _this.animationStyle);
+            _this.$window.show();
+            _this.$closeButton.focus();
+        });
+    };
+    FeedbackDlg.prototype.endModal = function () {
+        this.$background.hide();
+        this.$window.hide();
+        console.assert(this.resolve !== undefined);
+        var resolve = this.resolve;
+        this.resolve = undefined;
+        resolve();
+    };
+    return FeedbackDlg;
+}());
+exports.FeedbackDlg = FeedbackDlg;
+//# sourceMappingURL=FeedbackDlg.js.map
+
+/***/ }),
+
 /***/ "./build/oe-anh-doe/src/Generator.js":
 /*!*******************************************!*\
   !*** ./build/oe-anh-doe/src/Generator.js ***!
@@ -150,100 +201,6 @@ function randomInt(n) {
     return Math.floor(Math.random() * n);
 }
 //# sourceMappingURL=Generator.js.map
-
-/***/ }),
-
-/***/ "./build/oe-anh-doe/src/ModalDialog.js":
-/*!*********************************************!*\
-  !*** ./build/oe-anh-doe/src/ModalDialog.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var ModalDialog = /** @class */ (function () {
-    function ModalDialog(nodeId, animationStyle, buttonCaption) {
-        var _this = this;
-        this.animationStyle = animationStyle;
-        this.$background = $('#modalBackground');
-        var child = function (cname) { return $("#modalBackground " + cname); };
-        this.$window = child('#' + nodeId);
-        this.$closeButton = child('#closeButton');
-        this.$closeButton.text(buttonCaption);
-        this.$closeButton.click(function () { return _this.onClose(); });
-        this.$closeButton.focus();
-    }
-    ModalDialog.prototype.onEnterKey = function () {
-        this.onClose();
-    };
-    ModalDialog.prototype.findChild = function (selector) {
-        return this.$window.find(selector);
-    };
-    ModalDialog.prototype.show = function (yes) {
-        if (yes) {
-            this.$background.show();
-            this.$window.css('animation', this.animationStyle);
-            this.$window.show();
-        }
-        else {
-            this.$background.hide();
-            this.$window.hide();
-        }
-    };
-    return ModalDialog;
-}());
-exports.ModalDialog = ModalDialog;
-//# sourceMappingURL=ModalDialog.js.map
-
-/***/ }),
-
-/***/ "./build/oe-anh-doe/src/ModalWindow.js":
-/*!*********************************************!*\
-  !*** ./build/oe-anh-doe/src/ModalWindow.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var ModalWindowStack = /** @class */ (function () {
-    function ModalWindowStack() {
-        var _this = this;
-        this.windows = [];
-        document.onkeypress = (function (event) {
-            if (event.keyCode === 13) {
-                event.stopPropagation();
-                event.preventDefault();
-                var len = _this.windows.length;
-                if (len == 0) {
-                    return;
-                }
-                // 콜백 실행 {
-                // 이 안에서 this.windows가 바뀔 수 있음.
-                _this.windows[len - 1].onEnterKey();
-                // 콜백 실행 }
-            }
-        });
-    }
-    ModalWindowStack.prototype.showAndPush = function (wnd) {
-        console.assert(this.windows.findIndex(function (v) { return v == wnd; }) < 0);
-        this.windows.push(wnd);
-        wnd.show(true);
-    };
-    ModalWindowStack.prototype.hideAndPop = function (wnd) {
-        var len = this.windows.length;
-        console.assert(len > 0);
-        console.assert(this.windows[len - 1] == wnd);
-        this.windows.pop();
-        wnd.show(false);
-    };
-    return ModalWindowStack;
-}());
-exports.ModalWindowStack = ModalWindowStack;
-//# sourceMappingURL=ModalWindow.js.map
 
 /***/ }),
 
@@ -327,6 +284,13 @@ var ProblemView = /** @class */ (function () {
         this.$totalProblemCount = $('#problemDlg #totalProblemCount');
         this.$enterButton.click(function () { return _this.onEnterKey(); });
         this.$answer.keyup(function () { _this.updateQuestionText(); _this.updateEnterButton(); });
+        this.$answer.keypress(function (event) {
+            if (event.keyCode === 13) {
+                event.stopPropagation();
+                event.preventDefault();
+                _this.onEnterKey();
+            }
+        });
     }
     ProblemView.prototype.onEnterKey = function () {
         if (this.canEnter()) {
@@ -387,6 +351,7 @@ var ProblemView = /** @class */ (function () {
     };
     ProblemView.prototype.resetAnswerText = function () {
         this.$answer.val('');
+        this.updateEnterButton();
     };
     ProblemView.prototype.enableInput = function (yes) {
         this.$answer.prop('disabled', !yes);
@@ -409,37 +374,50 @@ exports.ProblemView = ProblemView;
 
 /***/ }),
 
-/***/ "./build/oe-anh-doe/src/ResultView.js":
-/*!********************************************!*\
-  !*** ./build/oe-anh-doe/src/ResultView.js ***!
-  \********************************************/
+/***/ "./build/oe-anh-doe/src/ResultDlg.js":
+/*!*******************************************!*\
+  !*** ./build/oe-anh-doe/src/ResultDlg.js ***!
+  \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var ResultView = /** @class */ (function () {
-    function ResultView(model) {
+var ResultDlg = /** @class */ (function () {
+    function ResultDlg(model) {
         var _this = this;
         this.model = model;
         this.$root = $('#resultDlg');
-        var child = function (cname) { return $("#resultDlg " + cname); };
-        this.$tbody = child('#tbody');
-        this.$trYesTemplate = child('#trYes');
-        this.$trNoTemplate = child('#trNo');
-        this.$retryButton = child('#retryButton');
-        this.$perfect = child('#perfect');
+        this.$tbody = this.$root.find('#tbody');
+        this.$trYesTemplate = this.$root.find('#trYes');
+        this.$trNoTemplate = this.$root.find('#trNo');
+        this.$retryButton = this.$root.find('#retryButton');
+        this.$perfect = this.$root.find('#perfect');
         this.$trYesTemplate.detach();
         this.$trNoTemplate.detach();
-        this.$retryButton.click(function () {
-            _this.onRetry();
-        });
+        this.$retryButton.click(function () { return _this.endModal(); });
     }
-    ResultView.prototype.onEnterKey = function () {
-        this.onRetry();
+    ResultDlg.prototype.doModal = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            console.assert(_this.resolve === undefined);
+            _this.resolve = resolve;
+            // UI 이벤트에서 에러핸들링하기가 마땅찮아서
+            // reject는 쓰지 않는다
+            _this.update();
+            _this.$root.show();
+            _this.$retryButton.focus();
+        });
     };
-    ResultView.prototype.update = function () {
+    ResultDlg.prototype.endModal = function () {
+        this.$root.hide();
+        console.assert(this.resolve !== undefined);
+        var resolve = this.resolve;
+        this.resolve = undefined;
+        resolve();
+    };
+    ResultDlg.prototype.update = function () {
         this.$tbody.empty();
         for (var i in this.model.problems) {
             var p = this.model.problems[i];
@@ -464,18 +442,10 @@ var ResultView = /** @class */ (function () {
             this.$perfect.hide();
         }
     };
-    ResultView.prototype.show = function (yes) {
-        if (yes) {
-            this.$root.show();
-        }
-        else {
-            this.$root.hide();
-        }
-    };
-    return ResultView;
+    return ResultDlg;
 }());
-exports.ResultView = ResultView;
-//# sourceMappingURL=ResultView.js.map
+exports.ResultDlg = ResultDlg;
+//# sourceMappingURL=ResultDlg.js.map
 
 /***/ }),
 
@@ -488,12 +458,47 @@ exports.ResultView = ResultView;
 
 "use strict";
 
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var Model_1 = __webpack_require__(/*! ./Model */ "./build/oe-anh-doe/src/Model.js");
 var ProblemView_1 = __webpack_require__(/*! ./ProblemView */ "./build/oe-anh-doe/src/ProblemView.js");
-var ResultView_1 = __webpack_require__(/*! ./ResultView */ "./build/oe-anh-doe/src/ResultView.js");
-var ModalDialog_1 = __webpack_require__(/*! ./ModalDialog */ "./build/oe-anh-doe/src/ModalDialog.js");
-var ModalWindow_1 = __webpack_require__(/*! ./ModalWindow */ "./build/oe-anh-doe/src/ModalWindow.js");
+var ResultDlg_1 = __webpack_require__(/*! ./ResultDlg */ "./build/oe-anh-doe/src/ResultDlg.js");
+var FeedbackDlg_1 = __webpack_require__(/*! ./FeedbackDlg */ "./build/oe-anh-doe/src/FeedbackDlg.js");
 var Generator_1 = __webpack_require__(/*! ./Generator */ "./build/oe-anh-doe/src/Generator.js");
 var rawData = [
     '{벚|벗|벛|벋|벝|벘}{꽃|꼿|꽂|꽅|꼳|꽀} 가지를 {꼿꼿|꽂꽂|꽃꽃|꼳꼳|꽅꽅|꽀꽀}하게 {꽂|꼿|꽃|꼳|꽅|꽀}{았|앗}다.',
@@ -523,78 +528,86 @@ var rawData = [
     '이제 너랑 같이 게임 {안|않} 할 거야!',
     '발 {밟|발|밥}지 {않|안}기!'
 ];
-$(document).ready(function () {
-    var problems = Generator_1.generateProblemList(rawData, 5);
-    var model = new Model_1.Model(problems);
-    var pview = new ProblemView_1.ProblemView(model);
-    var rview = new ResultView_1.ResultView(model);
-    var wstack = new ModalWindow_1.ModalWindowStack();
-    showProblemView();
+$(document).ready(function () { return __awaiter(_this, void 0, void 0, function () {
     //-------------------------------------------------------------------------
-    function showProblemView() {
-        model.goToStart();
-        pview.setUpQuestion();
-        pview.resetAnswerText();
-        wstack.showAndPush(pview);
-        pview.enableInput(true);
-        pview.onEnter = function () {
-            pview.enableInput(false);
-            var p = model.getCurrentProblem();
-            if (pview.getAnswer() === p.rightAnswer) {
-                return showCorrectDlg();
-            }
-            else {
-                return showWrongDlg(p.rightAnswer);
-            }
-        };
+    function solveSingleProblem(p) {
+        return __awaiter(this, void 0, void 0, function () {
+            var caption;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        problemView.setUpQuestion();
+                        problemView.resetAnswerText();
+                        _a.label = 1;
+                    case 1:
+                        if (false) {}
+                        problemView.enableInput(true);
+                        return [4 /*yield*/, waitForEnter()];
+                    case 2:
+                        _a.sent();
+                        problemView.enableInput(false);
+                        if (!(problemView.getAnswer() !== p.rightAnswer)) return [3 /*break*/, 4];
+                        wrongDlg.findChild('#rightAnswer').text(p.rightAnswer);
+                        return [4 /*yield*/, wrongDlg.doModal('다시 해보기 ⏎')];
+                    case 3:
+                        _a.sent();
+                        model.retry();
+                        return [3 /*break*/, 6];
+                    case 4:
+                        caption = (model.getCurrentProblemNumber() >= model.getTotalProblemCount())
+                            ? '결과 확인하기 ⏎'
+                            : '다음 문제 ⏎';
+                        return [4 /*yield*/, correctDlg.doModal(caption)];
+                    case 5: return [2 /*return*/, _a.sent()];
+                    case 6: return [3 /*break*/, 1];
+                    case 7: return [2 /*return*/];
+                }
+            });
+        });
     }
     //-------------------------------------------------------------------------
-    function showCorrectDlg() {
-        var buttonCaption = model.getCurrentProblemNumber() >= model.getTotalProblemCount()
-            ? '결과 확인하기 ⏎'
-            : '다음 문제 ⏎';
-        var dlg = new ModalDialog_1.ModalDialog('correctDlg', 'kf_popin 0.7s', buttonCaption);
-        wstack.showAndPush(dlg);
-        dlg.onClose = function () {
-            wstack.hideAndPop(dlg);
-            model.next();
-            if (model.isEnded()) {
-                wstack.hideAndPop(pview);
-                showResultView();
-            }
-            else {
-                pview.setUpQuestion();
-                pview.resetAnswerText();
-                pview.enableInput(true);
-            }
-        };
+    function waitForEnter() {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (resolve, reject) {
+                        problemView.onEnter = function () { return resolve(); };
+                    })];
+            });
+        });
     }
-    //-------------------------------------------------------------------------
-    function showWrongDlg(rightAnswer) {
-        var dlg = new ModalDialog_1.ModalDialog('wrongDlg', 'kf_drop 0.7s', '다시 해보기 ⏎');
-        dlg.findChild('#rightAnswer').text(rightAnswer);
-        wstack.showAndPush(dlg);
-        dlg.onClose = function () {
-            wstack.hideAndPop(dlg);
-            model.retry();
-            pview.enableInput(true);
-        };
-    }
-    //-------------------------------------------------------------------------
-    function showResultView() {
-        rview.update();
-        if (model.wasPerfect()) {
-            rview.onRetry = function () { };
+    var problems, model, problemView, resultDlg, correctDlg, wrongDlg;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                problems = Generator_1.generateProblemList(rawData, 5);
+                model = new Model_1.Model(problems);
+                problemView = new ProblemView_1.ProblemView(model);
+                resultDlg = new ResultDlg_1.ResultDlg(model);
+                correctDlg = new FeedbackDlg_1.FeedbackDlg('correctDlg', 'kf_popin 0.7s');
+                wrongDlg = new FeedbackDlg_1.FeedbackDlg('wrongDlg', 'kf_drop 0.7s');
+                _a.label = 1;
+            case 1:
+                if (false) {}
+                model.goToStart();
+                problemView.show(true);
+                _a.label = 2;
+            case 2:
+                if (!!model.isEnded()) return [3 /*break*/, 4];
+                return [4 /*yield*/, solveSingleProblem(model.getCurrentProblem())];
+            case 3:
+                _a.sent();
+                model.next();
+                return [3 /*break*/, 2];
+            case 4:
+                problemView.show(false);
+                return [4 /*yield*/, resultDlg.doModal()];
+            case 5:
+                _a.sent();
+                return [3 /*break*/, 1];
+            case 6: return [2 /*return*/];
         }
-        else {
-            rview.onRetry = function () {
-                wstack.hideAndPop(rview);
-                showProblemView();
-            };
-        }
-        wstack.showAndPush(rview);
-    }
-});
+    });
+}); });
 //# sourceMappingURL=main.js.map
 
 /***/ })
