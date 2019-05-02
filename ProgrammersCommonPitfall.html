@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-80982314-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-80982314-1');
+	</script>
+
+	<title>
+		프로그래머가 빠지기 쉬운 함정	</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
+	<meta name="viewport" content="width=device-width" />
+	<LINK rel='STYLESHEET' type='text/css' href='syntax/SyntaxHighlighter.css'>
+	<style>
+		body { font-family: "Malgun Gothic"; font-size:10pt; color:#404040; line-height:180%; letter-spacing: 0pt; padding:0; margin:0; }
+		.quote { font-size: 13pt; background-color:#f0f0f0; border:1px solid #e0e0e0; font-family: "Malgun Gothic"; padding: 10pt; }
+		.date_in_article {
+			font-size: 9pt;
+			color: gray;
+		}
+		.date_in_list {
+			font-size: 8pt;
+			color: gray;
+		}
+		.i {
+			color: #6699ff;
+		}
+		a.internal_link {
+			color: #6699ff;
+		}
+		a.internal_link:visited {
+			color: #446688;
+		}
+		a.external_link {
+			color: #008000;
+		}
+		a.external_link:visited {
+			color: #004000;
+		}
+		.emptyLine {
+			height: 10pt;
+		}
+		.indent1 { margin-left: 10pt; }
+		.indent2 { margin-left: 20pt; }
+		.indent3 { margin-left: 30pt; }
+		.indent4 { margin-left: 40pt; }
+		.indent5 { margin-left: 50pt; }
+
+		.header {
+			font-size: 9pt;
+			text-decoration: none;
+			color: #606060;
+		}
+
+		.footer {
+			font-size: 9pt;
+			text-decoration: none;
+			color: #606060;
+		}
+
+		.content {
+			border-top: 1px solid #d0d0d0;
+			border-bottom:1px solid #d0d0d0;
+			padding-top:15pt;
+			padding-bottom:15pt;
+			margin-top:15pt;
+			margin-bottom:15pt;
+		}
+
+		p.compiled { padding:0; margin:0;}
+		hr.compiled { width: 100%; border:0; border-bottom:1px #d0d0d0 dashed; margin-top:10pt; margin-bottom:10pt; }
+		h1.compiled { font-size: 13pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		h2.compiled { font-size: 12pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		h3.compiled { font-size: 11pt; border:0px solid black; line-height:180%; margin:0; padding:0; margin-bottom:5pt; color:#404040; }
+		div.compiled_quote { font-family:Lucida Console,monospace; border:1px solid #d0d0d0; font-size:10pt; padding:5pt; color:#808080; background:#fbfbfb; }
+		div.compiled_emptyline { height: 15pt; }
+		li.compiled { margin-left: 15pt;}
+
+		@media (min-width:700px) {
+			.limit {
+				max-width:600pt;
+				margin-left:auto;
+				margin-right:auto;
+			}
+
+			.page {
+				background:#ffffff;
+				padding-top: 20pt;
+				padding-left: 20pt;
+				padding-right: 20pt;
+				padding-bottom: 20pt;
+				margin-bottom: 10pt;
+				border: 1px solid #d0d0d0;
+			}
+		}
+
+		@media (max-width:699px) {
+			.page {
+				background:#ffffff;
+				padding-left: 5pt;
+				padding-right: 5pt;
+				padding-top: 20pt;
+				padding-bottom: 20pt;
+				margin-bottom: 10pt;
+				border: 1px solid #d0d0d0;
+			}
+		}
+	</style>
+</head>
+
+<body bgcolor="#e0e0e0">
+	<div class='limit'>
+		<div style='margin:10pt; text-align: center;'>
+			<a href='/' class='footer'>lee-seungjae.github.io</a>
+		</div>
+		<div class='page'>
+							<font style='font-size:18pt;'>프로그래머가 빠지기 쉬운 함정</font>
+				<div class='date_in_article' style='padding-left:3pt'>
+					2019-05-02				</div>
+				<div class='content'>
+					<h2 class="compiled">
+ 어려운 문제를 푸는 즐거움
+</h2>
+<p class="compiled">
+어려운 문제를 풀어내면 기분이 좋습니다.
+</p>
+<p class="compiled">
+내가 뭔가 해낸 것 같고, 가치있는 것 같고, 똑똑한 것 같은 느낌이 들지요.
+</p>
+<p class="compiled">
+어떻게 보면 어려운 문제를 푸는 것이
+</p>
+<p class="compiled">
+프로그래머가 살아가기 위해 때때로 섭취해야 하는 필수 영양소인 거 같기도 합니다.
+</p>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+그러나 해결책을 적용하는 과정에서 비용이 얼마나 드는지,
+</p>
+<p class="compiled">
+이 문제를 풀면 어떤 가치가 생겨나는지를 생각해보지 않으면
+</p>
+<p class="compiled">
+굳이 풀 필요가 없는 문제를 풀기도 하고
+</p>
+<p class="compiled">
+가성비가 더 좋은 해결책을 놓치기도 합니다.
+</p>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+그러니 어떤 문제를 발견했을 때, 문제를 풀고 싶은 기분이 강하게 들었을 때
+</p>
+<p class="compiled">
+단지 어려워보여서, 재미있어보여서 그런 기분이 든 것은 아닌지 점검해 봅시다.
+</p>
+<div class="compiled_emptyline">
+</div>
+<h2 class="compiled">
+ 해결책을 먼저 정하고 나서 문제를 선택하기
+</h2>
+<p class="compiled">
+얼마 전에 다른 회사 다니는 분께 들은 얘기인데
+</p>
+<p class="compiled">
+현재 문제없이 잘 작동하고 있는 레거시 시스템을
+</p>
+<p class="compiled">
+요즘 인기인 모 미들웨어를 도입해서 재구현하자고 주장하는 분들이 있어서 골치가 아프다고 합니다.
+</p>
+<p class="compiled">
+왜 재구현해야 하냐면
+</p>
+<p class="compiled">
+그 미들웨어가 요즘 대세이기 때문이라고 합니다...............
+</p>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+망치의 오류라는 말이 있습니다.
+</p>
+<p class="compiled">
+손에 망치를 들고 있으면 모든 것이 못으로 보인다는 뜻입니다.
+</p>
+<p class="compiled">
+새 도구를 들었으면 신나지요.
+</p>
+<p class="compiled">
+빨리 써보고 싶게 마련입니다.
+</p>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+망치를 들고 나서, 그것으로 두들길 못을 '찾아보는' 것까지는 좋습니다.
+</p>
+<p class="compiled">
+그런데 못 두들기는 일을 정식으로 추진할 업무로 제안하려면
+</p>
+<p class="compiled">
+이것이 (다른 것이 아니라, 망치로 두들겨야 하는) 못이고,
+</p>
+<p class="compiled">
+시간과 예산을 들여 이 못을 두들길 가치가 있다는 것을
+</p>
+<p class="compiled">
+사람들에게 설득할 준비를 해야 합니다.
+</p>
+<div class="compiled_emptyline">
+</div>
+<h2 class="compiled">
+ 객관식 시험처럼 생각
+</h2>
+<p class="compiled">
+객관식 시험은 답이 보통 다섯 개 중 하나이고,
+</p>
+<p class="compiled">
+제한된 시간 안에 여러 문제의 답을 골라야 합니다.
+</p>
+<p class="compiled">
+따라서 잘 모르겠으면 가장 그럴싸한 하나를 찍고 다음 문제로 넘어가는 것이
+</p>
+<p class="compiled">
+객관식 시험에서 좋은 점수를 얻는 전략입니다.
+</p>
+<p class="compiled">
+우리는 초중고등학교를 다니며 10년에 걸쳐 꾸준히 객관식 시험을 봐왔기 때문에
+</p>
+<p class="compiled">
+그런 습관이 사고 과정에 알게모르게 배어있습니다.
+</p>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+그런데 현실 문제에 대한 의사결정을 내릴 때는
+</p>
+<p class="compiled">
+빨리 결정해야 하는 문제도 있고, 그렇지 않은 문제도 있습니다.
+</p>
+<p class="compiled">
+해결책 후보 둘 다 하는게 가장 좋은 경우일 때도 있고
+</p>
+<p class="compiled">
+아무것도 안하는 게 가장 좋은 경우일 때도 있습니다.
+</p>
+<p class="compiled">
+때로는 결정을 보류하고 더 기다려봐야 할 때도 있고
+</p>
+<p class="compiled">
+정보를 더 얻어야 할 때도 있습니다.
+</p>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+여러개 고르기 / 아무것도 안고르기 / 기다리기 / 정보를 더 얻기가
+</p>
+<p class="compiled">
+항상 선택지에 있다고 생각합시다.
+</p>
+<div class="compiled_emptyline">
+</div>
+<h2 class="compiled">
+ 완벽한 해결책에 집착
+</h2>
+<p class="compiled">
+골치아픈 문제가 있을 때
+</p>
+<p class="compiled">
+완벽한 해결책을 찾으려고 애쓰다가
+</p>
+<p class="compiled">
+현재 상황에 적절한 해결책을 놓치는 경우가 있습니다.
+</p>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+대학교 수업에서 나오는 과제들은 내가 성실하게 한다면
+</p>
+<p class="compiled">
+대부분의 경우 모든 스펙을 만족시킬 수 있었습니다.
+</p>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+그런데 현실의 문제는 그렇지 않은 경우가 많습니다.
+</p>
+<p class="compiled">
+모든 스펙을 만족시키는 솔루션이 존재하지 않는 경우도 있고
+</p>
+<p class="compiled">
+모든 스펙을 기계적으로 달성하려다가 비용이나 유지보수성 등
+</p>
+<p class="compiled">
+스펙 문서에 명시되어 있지 않은 보편 가치를 희생하게 되기도 합니다.
+</p>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+모든 문제를 완벽하게 풀어야 할 필요는 없습니다.
+</p>
+<p class="compiled">
+맥락을 좀더 의식하고, 이 문제를 어느 정도로 해결하면 얼마만큼의 가치가 생겨나는지 생각합시다.
+</p>
+<div class="compiled_emptyline">
+</div>
+<h2 class="compiled">
+ 무지를 인정하지 않음
+</h2>
+<p class="compiled">
+내가 이해하지 못하고 있는 것, 내가 모르는 것을 만났을 때 흔히 빠지는 함정이
+</p>
+<p class="compiled">
+그것을 잘못된 것, 필요없는 것으로 규정하는 것입니다.
+</p>
+<p class="compiled">
+당장 마음은 편하겠지만 이해의 지평을 넓힐 기회를 잃게 됩니다.
+</p>
+<div class="compiled_emptyline">
+</div>
+<p class="compiled">
+이건 딱히 프로그래머가 아니라도 누구에게나 일어나는 심리적 방어기제(합리화)인데
+</p>
+<p class="compiled">
+이것이 방어기제에 의한 충동임을 의식하면 이겨내기 쉽습니다.
+</p>
+<p class="compiled">
+내가 이해하지 못하는 것, 내가 모르는 것이 있을 수 있다는 것을 인정하고
+</p>
+<p class="compiled">
+판단을 보류하고, 조금만 더 다른 사람들의 이야기를 들어봅시다.
+</p>				</div>
+				<div>
+					<a href='index.html' class='internal_link'>목록으로</a>
+				</div>
+					</div>
+		<div>
+			<center>
+				<a href='http://twitter.com/0xcafea1fa' class='footer'>@0xcafea1fa</a>
+				<span class='footer'>┃</span>
+				<a href='rss.xml' class='footer'>RSS</a>
+			</center>
+			<br>
+		</div>
+	</div>
+	<script class="javascript" src="syntax/shCore.js"></script> 
+	<script class="javascript" src="syntax/shBrushCSharp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCpp.js"></script> 
+	<script class="javascript" src="syntax/shBrushCss.js"></script> 
+	<script class="javascript" src="syntax/shBrushDelphi.js"></script> 
+	<script class="javascript" src="syntax/shBrushJScript.js"></script> 
+	<script class="javascript" src="syntax/shBrushJava.js"></script> 
+	<script class="javascript" src="syntax/shBrushPhp.js"></script> 
+	<script class="javascript" src="syntax/shBrushPython.js"></script> 
+	<script class="javascript" src="syntax/shBrushRuby.js"></script> 
+	<script class="javascript" src="syntax/shBrushSql.js"></script> 
+	<script class="javascript" src="syntax/shBrushVb.js"></script> 
+	<script class="javascript" src="syntax/shBrushXml.js"></script> 
+	<script class="javascript"> 
+		dp.SyntaxHighlighter.ClipboardSwf = 'syntax/clipboard.swf';
+		dp.SyntaxHighlighter.HighlightAll('code');
+	</script>
+</body>
+</html>
