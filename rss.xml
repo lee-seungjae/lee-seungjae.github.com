@@ -7,6 +7,16 @@
 	<description></description>
 
 			<item>
+			<title>NDC22 - 그때 알았더라면 좋았을 것들: 개발 직군 신임 직책자를 위한 피플 매니지먼트 개론</title>
+			<pubDate>26 Oct 2024 00:00:00 +0900</pubDate>
+			<description>
+			<![CDATA[[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2022/sessions/NDC2022_0018.html]
+
+온라인 세션....]]>
+			</description>
+			<link>http://lee-seungjae.github.io/NDC2022-PeopleManagement101.html</link>
+		</item>
+			<item>
 			<title>프로그래머가 빠지기 쉬운 함정</title>
 			<pubDate>02 May 2019 00:00:00 +0900</pubDate>
 			<description>
@@ -29,14 +39,14 @@
 			<link>http://lee-seungjae.github.io/NDC2018-SilvervineServerEngine2DesignReview.html</link>
 		</item>
 			<item>
-			<title>NDC17 - 내가 만든 언어의 개발환경을 Visual Studio Code로 빠르고 쉽게 구축하기</title>
+			<title>NDC17 - 개발자를 위한 제작진행개론: 일정대로 출시하기 왜 &amp; 어떻게</title>
 			<pubDate>09 Aug 2017 00:00:00 +0900</pubDate>
 			<description>
-			<![CDATA[[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2017/sessions/NDC2017_0001.html]
+			<![CDATA[[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2017/sessions/NDC2017_0024.html]
 
-2017년 4월 25일, 50분 세션....]]>
+2017년 4월 26일, 50분 세션....]]>
 			</description>
-			<link>http://lee-seungjae.github.io/NDC2017-VSCodeExtensionDevelopment.html</link>
+			<link>http://lee-seungjae.github.io/NDC2017-ProductionManagement.html</link>
 		</item>
 			<item>
 			<title>NDC17 - NDC Replay 제작기 : static website, static backoffice</title>
@@ -49,14 +59,14 @@
 			<link>http://lee-seungjae.github.io/NDC2017-NDCReplay.html</link>
 		</item>
 			<item>
-			<title>NDC17 - 개발자를 위한 제작진행개론: 일정대로 출시하기 왜 &amp; 어떻게</title>
+			<title>NDC17 - 내가 만든 언어의 개발환경을 Visual Studio Code로 빠르고 쉽게 구축하기</title>
 			<pubDate>09 Aug 2017 00:00:00 +0900</pubDate>
 			<description>
-			<![CDATA[[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2017/sessions/NDC2017_0024.html]
+			<![CDATA[[NDC REPLAY 사이트에서 보기:http://ndcreplay.nexon.com/NDC2017/sessions/NDC2017_0001.html]
 
-2017년 4월 26일, 50분 세션....]]>
+2017년 4월 25일, 50분 세션....]]>
 			</description>
-			<link>http://lee-seungjae.github.io/NDC2017-ProductionManagement.html</link>
+			<link>http://lee-seungjae.github.io/NDC2017-VSCodeExtensionDevelopment.html</link>
 		</item>
 			<item>
 			<title>NDC16 - &lt;마비노기 듀얼&gt; 라이브 서비스 사건사고기록</title>
@@ -99,18 +109,6 @@
 지금의 경험을 가지고 그때로 돌아가도 같은 선택을 하겠냐고 물으신다면, 예, 그렇게 할 거예요. 극단적인 상황에서 내렸던 극단적인 선택이었고, 다른 상황에서는 다른 선택을 하겠죠."...]]>
 			</description>
 			<link>http://lee-seungjae.github.io/Interview.html</link>
-		</item>
-			<item>
-			<title>NDC14 - 사례로 배우는 디스어셈블리 디버깅</title>
-			<pubDate>27 May 2014 00:00:00 +0900</pubDate>
-			<description>
-			<![CDATA[<TAG>
-<iframe src="http://www.slideshare.net/slideshow/embed_code/35166099" width="687" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
-</TAG>
-
-2014년 5월 27일, 25분 세션....]]>
-			</description>
-			<link>http://lee-seungjae.github.io/DisassemblyDebugging.html</link>
 		</item>
 	</channel>
 </rss>
